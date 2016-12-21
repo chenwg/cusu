@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{$article.id ? '编辑文章' : '新增文章'}</title>
+  <link href="/static/11/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/11/css/font-awesome.min.css">
+  <link href="/src/css/layui.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/edit/css/wangEditor.css">
+</head>
+<style>
+body{font-family: '微软雅黑';background-color: #ddd}
+</style>
+<body>
+  <header></header>
+  <section class="container">
+    <div class="form-horizontal" style="padding-top:40px">
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">文章标题：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="title" id="title" value="{$article.title}" placeholder="请输入标题">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">类别：</label>
+    <div class="col-sm-10">
+      <select class="form-control" id="en">
+      <option value="suibi" {eq name="$article.en" value="suibi"}selected="selected"{/eq}>随笔</option>
+      <option value="jilu" {eq name="$article.en" value="jilu"}selected="selected"{/eq}>记录</option>
+      <option value="php" {eq name="$article.en" value="php"}selected="selected"{/eq}>学习-PHP</option>
+      <option value="js" {eq name="$article.en" value="js"}selected="selected"{/eq}>学习-javascript</option>
+      <option value="mysql" {eq name="$article.en" value="mysql"}selected="selected"{/eq}>学习-mysql</option>
+      <option value="redis" {eq name="$article.en" value="redis"}selected="selected"{/eq}>学习-redis</option>
+      <option value="nodejs" {eq name="$article.en" value="nodejs"}selected="selected"{/eq}>学习-nodejs</option>
+      <option value="http" {eq name="$article.en" value="http"}selected="selected"{/eq}>学习-http</option>
+      <option value="other" {eq name="$article.en" value="other"}selected="selected"{/eq}>学习-other</option>
+    </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">简介：</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" rows="3" name="profile" id="profile">{$article.profile}</textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">外链地址：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="curl" id="curl" value="{$article.curl}" placeholder="请输入链接">
+      <font color="#ff0000">(如外链地址填写，内容选项无需填写，标题也可以不填写，系统会根据地址获取对应的标题，
+        如无法获取则默认此链接为标题。如已填写上述标题则以填写的为主)</font>
+    </div>
+  </div>
+  <div class="form-group" id="addCurl">
+    <label for="" class="col-sm-2 control-label">内容：</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" rows="15" name="info" id="info">
+        {$article.info}
+      </textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button class="btn btn-default" name="{$article.id}">提交{$article.id ? '编辑' : '新增'}</button>
+    </div>
+  </div>
+</div>
+  </section>
+  <script src="/static/11/js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/edit/js/wangEditor.js"></script>
+  <script src="/src/layer.js"></script>
+  <script type="text/javascript">
+    var editor = new wangEditor('info');
+    editor.create();
+</script>
+<script>
+  $(function(){
+    $('.btn-default').on('click',function(){
+      if($('#curl').val() == '' && $('#title').val() == ''){
+        layer.tips('请输入标题','#title',{tips: [3, '#39BDF9']});
+        return false;
+      }
+      if($('#curl').val() != '' && !$('#curl').val().match(/(http[s]?|ftp):\/\/[^\/\.]+?\..+\w$/i)){
+        layer.tips('请输入正确的外链地址','#curl',{tips: [3, '#39BDF9']});
+        return false;
+      }
+      /*
+      if($('#profile').val() == ''){
+        layer.tips('请输入简介','#profile',{tips: [3, '#39BDF9']});
+        return false;
+      }
+      */
+      var id = {$article.id ? $article.id : 0};
+      $.post('/add',
+      {
+        title:$('#title').val(),
+        info:$('#info').val(),
+        profile:$('#profile').val(),
+        en:$('#en').val(),
+        curl:$('#curl').val(),
+        id:id
+      },
+      function(res){
+        console.log(res)
+        if(res.s == 1){
+          if(id > 0){
+            layer.msg('编辑成功', {icon: 1});
+          }else{
+            layer.msg('新增成功', {icon: 1},function(){
+              //window.location.href = '/bj/id/'+res.i;
+              window.location.reload();
+            });
+          }
+        }else if(res.s == 2){
+          layer.msg('标题重复，请更改标题', {icon: 2});
+        }else{
+          console.log(res.i)
+          //layer.msg('提交失败，请稍后重试', {icon: 2});
+        }
+      })
+    })
+  })
+</script>
+</body>
+</html>
