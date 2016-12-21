@@ -13,12 +13,14 @@
   {if condition="isset($data.title)"}
   <h3>{$data.title}</h3>
   {$data.info}
+  <div style="margin-left:115px;margin-top:20px;color:#ff0000"><a href="javascript:;" onclick="Preview()">打印这篇文章</a></div>
+  <div style="margin-left:115px;color:#ff0000"><a href="/home/article/export_word/id/{$data.id}">导出为word</a></div>
   {else/}
   {volist name="data" id='vo'}
    <div class="list-group-item">
        <div class="row">
            <div class="col-xs-12 col-sm-10">
-               <a href='{if condition="empty($vo.curl)"}/article/id/{$vo.id}{else/}{$vo.curl}{/if}' 
+               <a href='{if condition="empty($vo.curl)"}/article/id/{$vo.id}{else/}{$vo.curl}{/if}'
                class="pjax-no" target="_blank"><h4>{$vo.title}</h4></a>
                <p>{$vo.profile}</p>
                {compare name="$Think.session.uid" value="0" type="gt"}
