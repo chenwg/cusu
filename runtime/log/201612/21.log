@@ -1,0 +1,600 @@
+[ 2016-12-21T15:36:05+08:00 ] 127.0.0.1 127.0.0.1 GET /article
+[ log ] art.com/article [运行时间：0.685039s][吞吐率：1.46req/s] [内存消耗：2,257.30kb] [文件加载：66]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007000s ] mysql:dbname=vki_cms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vki_article` [ RunTime:0.061004s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `vki_article` WHERE  `is_delete` = 0  AND `en` = 'suibi' ORDER BY create_time desc LIMIT 1     [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SELECT * FROM `vki_article` WHERE  `is_delete` = 0  AND `en` = 'suibi' ORDER BY create_time desc LIMIT 0,2     [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-12-21T15:36:05+08:00 ] 127.0.0.1 127.0.0.1 GET /article
+[ log ] art.com/article [运行时间：0.039002s][吞吐率：25.64req/s] [内存消耗：1,564.80kb] [文件加载：56]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-12-21T15:36:11+08:00 ] 127.0.0.1 127.0.0.1 GET /article?page=2&_pjax=.list-group
+[ log ] art.com/article?page=2&_pjax=.list-group [运行时间：0.052003s][吞吐率：19.23req/s] [内存消耗：2,251.41kb] [文件加载：66]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541; PHPSESSID=hdi0rsnbe1gjjjkqetvgd0dl24',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'referer' => 'http://art.com/article',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'x-pjax-container' => '.list-group',
+  'x-pjax' => 'true',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'text/html, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+  'page' => '2',
+  '_pjax' => '.list-group',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article-item.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010000s ] mysql:dbname=vki_cms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vki_article` [ RunTime:0.006001s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `vki_article` WHERE  `is_delete` = 0  AND `en` = 'suibi' ORDER BY create_time desc LIMIT 1     [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `vki_article` WHERE  `is_delete` = 0  AND `en` = 'suibi' ORDER BY create_time desc LIMIT 2,2     [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-12-21T15:36:12+08:00 ] 127.0.0.1 127.0.0.1 GET /article?page=3&_pjax=.list-group
+[ log ] art.com/article?page=3&_pjax=.list-group [运行时间：0.046003s][吞吐率：21.74req/s] [内存消耗：2,133.56kb] [文件加载：64]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541; PHPSESSID=hdi0rsnbe1gjjjkqetvgd0dl24',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'referer' => 'http://art.com/article?page=2',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'x-pjax-container' => '.list-group',
+  'x-pjax' => 'true',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'text/html, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+  'page' => '3',
+  '_pjax' => '.list-group',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article-item.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=vki_cms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vki_article` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `vki_article` WHERE  `is_delete` = 0  AND `en` = 'suibi' ORDER BY create_time desc LIMIT 1     [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `vki_article` WHERE  `is_delete` = 0  AND `en` = 'suibi' ORDER BY create_time desc LIMIT 4,2     [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-12-21T15:36:13+08:00 ] 127.0.0.1 127.0.0.1 GET /article?page=4&_pjax=.list-group
+[ log ] art.com/article?page=4&_pjax=.list-group [运行时间：0.040003s][吞吐率：25.00req/s] [内存消耗：2,131.19kb] [文件加载：64]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541; PHPSESSID=hdi0rsnbe1gjjjkqetvgd0dl24',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'referer' => 'http://art.com/article?page=3',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'x-pjax-container' => '.list-group',
+  'x-pjax' => 'true',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'text/html, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+  'page' => '4',
+  '_pjax' => '.list-group',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article-item.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002000s ] mysql:dbname=vki_cms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vki_article` [ RunTime:0.007000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `vki_article` WHERE  `is_delete` = 0  AND `en` = 'suibi' ORDER BY create_time desc LIMIT 1     [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `vki_article` WHERE  `is_delete` = 0  AND `en` = 'suibi' ORDER BY create_time desc LIMIT 6,2     [ RunTime:0.001000s ]
+
+---------------------------------------------------------------
+[ 2016-12-21T15:36:14+08:00 ] 127.0.0.1 127.0.0.1 GET /article?page=2&_pjax=.list-group
+[ log ] art.com/article?page=2&_pjax=.list-group [运行时间：0.025001s][吞吐率：40.00req/s] [内存消耗：1,560.98kb] [文件加载：56]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541; PHPSESSID=hdi0rsnbe1gjjjkqetvgd0dl24',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'referer' => 'http://art.com/article?page=4',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'x-pjax-container' => '.list-group',
+  'x-pjax' => 'true',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'text/html, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+  'page' => '2',
+  '_pjax' => '.list-group',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article-item.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-12-21T15:36:15+08:00 ] 127.0.0.1 127.0.0.1 GET /article?page=1&_pjax=.list-group
+[ log ] art.com/article?page=1&_pjax=.list-group [运行时间：0.042003s][吞吐率：23.81req/s] [内存消耗：2,134.65kb] [文件加载：64]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541; PHPSESSID=hdi0rsnbe1gjjjkqetvgd0dl24',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'referer' => 'http://art.com/article?page=2',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'x-pjax-container' => '.list-group',
+  'x-pjax' => 'true',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'text/html, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+  'page' => '1',
+  '_pjax' => '.list-group',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article-item.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001000s ] mysql:dbname=vki_cms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vki_article` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `vki_article` WHERE  `is_delete` = 0  AND `en` = 'suibi' ORDER BY create_time desc LIMIT 1     [ RunTime:0.001000s ]
+[ sql ] [ SQL ] SELECT * FROM `vki_article` WHERE  `is_delete` = 0  AND `en` = 'suibi' ORDER BY create_time desc LIMIT 0,2     [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2016-12-21T15:39:20+08:00 ] 127.0.0.1 127.0.0.1 GET /article?page=2&_pjax=.list-group
+[ log ] art.com/article?page=2&_pjax=.list-group [运行时间：0.033002s][吞吐率：30.30req/s] [内存消耗：1,560.98kb] [文件加载：56]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541; PHPSESSID=hdi0rsnbe1gjjjkqetvgd0dl24',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'referer' => 'http://art.com/article?page=1',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'x-pjax-container' => '.list-group',
+  'x-pjax' => 'true',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'text/html, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+  'page' => '2',
+  '_pjax' => '.list-group',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article-item.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-12-21T15:39:22+08:00 ] 127.0.0.1 127.0.0.1 GET /article?page=3&_pjax=.list-group
+[ log ] art.com/article?page=3&_pjax=.list-group [运行时间：0.037002s][吞吐率：27.03req/s] [内存消耗：1,560.58kb] [文件加载：56]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541; PHPSESSID=hdi0rsnbe1gjjjkqetvgd0dl24',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'referer' => 'http://art.com/article?page=2',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'x-pjax-container' => '.list-group',
+  'x-pjax' => 'true',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'text/html, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+  'page' => '3',
+  '_pjax' => '.list-group',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article-item.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-12-21T15:39:23+08:00 ] 127.0.0.1 127.0.0.1 GET /article?page=4&_pjax=.list-group
+[ log ] art.com/article?page=4&_pjax=.list-group [运行时间：0.039002s][吞吐率：25.64req/s] [内存消耗：1,556.68kb] [文件加载：56]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541; PHPSESSID=hdi0rsnbe1gjjjkqetvgd0dl24',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'referer' => 'http://art.com/article?page=3',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'x-pjax-container' => '.list-group',
+  'x-pjax' => 'true',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'text/html, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+  'page' => '4',
+  '_pjax' => '.list-group',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article-item.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2016-12-21T15:39:24+08:00 ] 127.0.0.1 127.0.0.1 GET /article/id/31
+[ log ] art.com/article/id/31 [运行时间：0.069004s][吞吐率：14.49req/s] [内存消耗：2,070.63kb] [文件加载：60]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541; PHPSESSID=hdi0rsnbe1gjjjkqetvgd0dl24',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'referer' => 'http://art.com/article?page=4',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article/id/31' => '',
+  'id' => '31',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article.html [ array (
+  0 => 'data',
+  1 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001001s ] mysql:dbname=vki_cms;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `vki_article` [ RunTime:0.006000s ]
+[ sql ] [ SQL ] SELECT * FROM `vki_article` `a` LEFT JOIN `vki_article_info` `b` ON `a`.`id`=`b`.`aid` WHERE  `is_delete` = 0  AND `id` = 31 ORDER BY create_time desc LIMIT 1     [ RunTime:0.017001s ]
+
+---------------------------------------------------------------
+[ 2016-12-21T15:39:27+08:00 ] 127.0.0.1 127.0.0.1 GET /article?page=1&_pjax=.list-group
+[ log ] art.com/article?page=1&_pjax=.list-group [运行时间：0.040002s][吞吐率：25.00req/s] [内存消耗：1,561.12kb] [文件加载：56]
+[ info ] [ LANG ] D:\www\mklu\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'home',
+    1 => 'article',
+    2 => 'res',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'Toutiao_login_msg=1; CNZZDATA1259612802=2065233808-1482285681-%7C1482285681; _ga=GA1.2.1294096360.1482289520; Hm_lvt_27a8006d842bb9eeda1db42b4f57409c=1482289541; PHPSESSID=hdi0rsnbe1gjjjkqetvgd0dl24',
+  'accept-language' => 'zh-CN,zh;q=0.8',
+  'accept-encoding' => 'gzip, deflate, sdch',
+  'referer' => 'http://art.com/article?page=4',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+  'x-pjax-container' => '.list-group',
+  'x-pjax' => 'true',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => 'text/html, */*; q=0.01',
+  'connection' => 'close',
+  'host' => 'art.com',
+)
+[ info ] [ PARAM ] array (
+  '/article' => '',
+  'page' => '1',
+  '_pjax' => '.list-group',
+)
+[ info ] [ RUN ] app\home\controller\Article->res[ D:\www\mklu\application\home\controller\Article.php ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ VIEW ] D:\www\mklu\public/../application/home\view\article\article-item.html [ array (
+  0 => 'data',
+  1 => 'page',
+  2 => 'title',
+) ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
