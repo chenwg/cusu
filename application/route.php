@@ -15,6 +15,7 @@ return [
     'in'=>['admin/login/login',['method'=>'post']],
     'bj'=>['admin/edit/index',['method'=>'get']],
     'add'=>['admin/edit/add',['method'=>'post']],
+    'fileupload'=>['admin/edit/img_upload',['method'=>'post']],
     'delete'=>['admin/edit/delete', ['method' => 'get']],
     '/'=>['home/article/res',['method'=>'get']],
 ];

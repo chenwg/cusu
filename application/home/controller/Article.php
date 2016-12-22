@@ -33,7 +33,6 @@ final class Article extends Entry
     }
     return 'error';
   }
-
   public function s(Request $req){
     return view('article/article'.$this->tpl,
     empty($req->param('kw')) ? ['data'=>null,'title'=>config('s')] : ArticleM::s($req->param('kw')));

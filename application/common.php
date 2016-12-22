@@ -19,3 +19,7 @@ function export($type,$id,$content){
   if($type == 2)return (new \app\common\controller\FileHanding('pdf'.'/'.md5('a_'.$id).'.pdf'))->pdf_export($content);
   if($type == 3)return (new \app\common\controller\FileHanding('excel'.'/'.md5('a_'.$id).'.xls'))->excel_export($content);
 }
+
+function img_upload(){
+  return (new \app\common\controller\FileHanding(null))->img_upload();
+}

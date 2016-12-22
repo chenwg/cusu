@@ -5,10 +5,21 @@ use think\Controller;
 class FileHanding extends Controller
 {
   protected $path;
-  public function __construct($p){
-    if(file_exists($p))return $this->redirect('/'.$p);
-    $this->path = $p;
+  public function __construct($p=null){
+    if(!empty($p)){
+      if(file_exists($p))return $this->redirect('/'.$p);
+      $this->path = $p;
+    }
     //Hi man ======================== My name is chenWeiguang
+  }
+  public function img_upload(){
+    $files = $_FILES['suFiles'];
+    //$susnameArr = [];
+    //$errnameAttr = [];
+    $fname = md5(time().$files['name'][0]).'.'.pathinfo($files['name'][0],PATHINFO_EXTENSION);
+    move_uploaded_file($files['tmp_name'][0],'files'.'/'.$fname);
+    //array_push($susnameArr,'files'.'/'.$fname);
+    return json(['susname'=>'/files'.'/'.$fname]);
   }
   //word===================================================
   public function word_export(string $content=null){
