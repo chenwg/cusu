@@ -126,7 +126,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
     var html1 = '<div class="file-preview-frame file-preview-success" data-fileindex="-1" data-template="image"><div class="kv-file-content">';
     $("#fileImages").fileinput({
       language: 'zh',
-      showPreview: false,
+      showPreview: true,
       uploadUrl:'/fileupload',
       allowedFileExtensions:['jpg','png','gif'],
       overwriteInitial:false,
@@ -141,7 +141,6 @@ body{font-family: '微软雅黑';background-color: #ddd}
       var imghtml = html1 + '<a href="' + img +'" target="_blank"><img class="imgSrc" src="' + img + '" style="width:auto;height:160px;"></a>' + $('#lahtml').html();
       $('#imgPreview').append(imghtml);
     })
-
     </script>
     <script>
     $(function(){

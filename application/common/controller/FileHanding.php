@@ -14,12 +14,13 @@ class FileHanding extends Controller
   }
   public function img_upload(){
     $files = $_FILES['suFiles'];
-    //$susnameArr = [];
-    //$errnameAttr = [];
+    if($files['size'][0] > 501*1024)return json(['susname'=>'','error'=>$files['name'][0].'图片大小不能大于500k']);
+    if(!in_array($files['type'][0],['image/jpeg','image/jpg','image/png','image/gif']))return json(['susname'=>'','error'=>$files['name'][0].'图片格式不正确']);
     $fname = md5(time().$files['name'][0]).'.'.pathinfo($files['name'][0],PATHINFO_EXTENSION);
-    move_uploaded_file($files['tmp_name'][0],'files'.'/'.$fname);
-    //array_push($susnameArr,'files'.'/'.$fname);
-    return json(['susname'=>'/files'.'/'.$fname]);
+    if(move_uploaded_file($files['tmp_name'][0],'files'.'/'.$fname))
+        return json(['susname'=>'/files'.'/'.$fname,'error'=>false]);
+      else
+        return json(['susname'=>'','error'=>'']);
   }
   //word===================================================
   public function word_export(string $content=null){
