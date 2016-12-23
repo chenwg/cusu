@@ -29,10 +29,10 @@ class Article extends Particle
     if(empty($data['img1']) && !empty($info)){
       $pattern = '/<img.*?src="(.*?)".*?>/i';
       preg_match_all($pattern,$info,$match);
-      if(isset($match[1][0]))$data['img1'] = $match[1][0];
-      if(isset($match[1][1]))$data['img2'] = $match[1][1];
-      if(isset($match[1][2]))$data['img3'] = $match[1][2];
-      if(isset($match[1][3]))$data['img4'] = $match[1][3];
+      isset($match[1][0]) && $data['img1'] = $match[1][0];
+      isset($match[1][1]) && $data['img2'] = $match[1][1];
+      isset($match[1][2]) && $data['img3'] = $match[1][2];
+      isset($match[1][3]) && $data['img4'] = $match[1][3];
     }
     $art = new Article;
     $en = $data['en'];
