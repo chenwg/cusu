@@ -27,13 +27,12 @@ class Article extends Particle
   public static function inArticle(int $id=0,array $data,string $info=''){
     if(!empty($data['curl']) && empty($data['title']))$data['title'] = (new \app\common\controller\Reptile())->get_title($data['curl']);
     if(empty($data['img1']) && !empty($info)){
-      $pattern = "/[img|IMG].*?src=['|\"](.*?(?:[.gif|.jpg|.png|.PNG|.jpeg]))['|\"].*?[\/]?>/";
+      $pattern = '/<img.*?src="(.*?)".*?>/i';
       preg_match_all($pattern,$info,$match);
-      return _res(4,$math);
-      if(isset($match[0]))$data['img1'] = $match[0];
-      if(isset($match[1]))$data['img2'] = $match[1];
-      if(isset($match[2]))$data['img3'] = $match[2];
-      if(isset($match[3]))$data['img4'] = $match[3];
+      if(isset($match[1][0]))$data['img1'] = $match[1][0];
+      if(isset($match[1][1]))$data['img2'] = $match[1][1];
+      if(isset($match[1][2]))$data['img3'] = $match[1][2];
+      if(isset($match[1][3]))$data['img4'] = $match[1][3];
     }
     $art = new Article;
     $en = $data['en'];

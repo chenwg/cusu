@@ -22,10 +22,10 @@ final class Edit extends Controller
     return Article::inArticle((int)$req->post('id'),[
       'title'=>htmlspecialchars($req->post('title','trim')),
       'profile'=>htmlspecialchars($req->post('profile')),
-      'img1'=> ($req->post('img1','trim') == 'undefined') ? '' : $req->post('img1','trim'),
-      'img2'=> ($req->post('img1','trim') == 'undefined') ? '' : $req->post('img2','trim'),
-      'img3'=> ($req->post('img1','trim') == 'undefined') ? '' : $req->post('img3','trim'),
-      'img4'=> ($req->post('img1','trim') == 'undefined') ? '' : $req->post('img4','trim'),
+      'img1'=> ($req->post('img1') == 'undefined') ? '' : $req->post('img1'),
+      'img2'=> ($req->post('img2') == 'undefined') ? '' : $req->post('img2'),
+      'img3'=> ($req->post('img3') == 'undefined') ? '' : $req->post('img3'),
+      'img4'=> ($req->post('img4') == 'undefined') ? '' : $req->post('img4'),
       'curl'=>$req->post('curl'),
       'en'=>$req->post('en')
     ],$req->post('info','htmlspecialchars'));
