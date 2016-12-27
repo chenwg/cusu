@@ -21,55 +21,57 @@ class Article extends Particle
     }
     return _res(1);
   }
-  public static function s(string $kw,int $page=0):array{
-    return self::search($kw,$page);
+  public static function s(string $keywords,int $page=0):array{
+    return self::search($keywords,$page);
   }
-  public static function inArticle(int $id=0,array $data,string $info=''){
-    if(!empty($data['curl']) && empty($data['title']))$data['title'] = (new \app\common\controller\Reptile())->get_title($data['curl']);
-    if(empty($data['img1']) && !empty($info)){
-      $pattern = '/<img.*?src="(.*?)".*?>/i';
-      preg_match_all($pattern,$info,$match);
-      isset($match[1][0]) && $data['img1'] = $match[1][0];
-      isset($match[1][1]) && $data['img2'] = $match[1][1];
-      isset($match[1][2]) && $data['img3'] = $match[1][2];
-      isset($match[1][3]) && $data['img4'] = $match[1][3];
+  public static function inArticle(int $id=0,array $articleData,string $articleInfo=''){
+    if(!empty($articleData['curl']) && empty($articleData['title'])){
+      $articleData['title'] = (new \app\common\controller\Reptile())->get_title($articleData['curl']);
     }
-    $art = new Article;
-    $en = $data['en'];
-    $dcache = array_merge($data,['info'=>$info,'id'=>$id]);
-    $count = $art->where(['en'=>$en,'is_delete'=>0])->count();
+    if(empty($articleData['img1']) && !empty($articleInfo)){
+      $pattern = '/<img.*?src="(.*?)".*?>/i';
+      preg_match_all($pattern,$articleInfo,$match);
+      isset($match[1][0]) && $articleData['img1'] = $match[1][0];
+      isset($match[1][1]) && $articleData['img2'] = $match[1][1];
+      isset($match[1][2]) && $articleData['img3'] = $match[1][2];
+      isset($match[1][3]) && $articleData['img4'] = $match[1][3];
+    }
+    $articleModel = new Article;
+    $en = $articleData['en'];
+    $articleCache = array_merge($articleData,['info'=>$articleInfo,'id'=>$id]);
+    $count = $articleModel->where(['en'=>$en,'is_delete'=>0])->count();
     if($id>0){
-      $resRow = $art->where('id',$id)->update($data);
-      $resRowi = (new ArticleInfo)->where('aid',$id)->update(['info'=>$info]);
-      if($resRow > 0 || $resRowi > 0){
+      $resRow = $articleModel->where('id',$id)->update($articleData);
+      $resRowInfo = (new ArticleInfo)->where('aid',$id)->update(['info'=>$info]);
+      if($resRow > 0 || $resRowInfo > 0){
         Cache::rm('a_'.$id);
-        Cache::set('a_'.$id,['data'=>$dcache,'title'=>$data['title']]);
+        Cache::set('a_'.$id,['data'=>$articleCache,'title'=>$articleData['title']]);
         file_exists('word/'.md5('a_'.$id).'.doc') && unlink('word/'.md5('a_'.$id).'.doc');
       }
       if($resRow > 0){
-        $arr = $art->where('id',$id)->find();
+        $articleOne = $articleModel->where('id',$id)->find();
         Cache::rm($en);
-        if($arr['en'] != $en){
-          Cache::rm($arr['en']);
-          $countold = $art->where('en',$arr['en'])->count();
+        if($articleOne['en'] != $en){
+          Cache::rm($articleOne['en']);
+          $countold = $articleModel->where('en',$articleOne['en'])->count();
           for($i=1,$j=1;$i<ceil($countold/config('page_size'))+2,$j<ceil($count/config('page_size'))+2;$i++,$j++){
-            Cache::rm($arr['en'].$i);
+            Cache::rm($articleOne['en'].$i);
             Cache::rm($en.$j);
           }
         }
       }
       return _res(1);
     }else{
-      if(!empty(Article::get(['title'=>$data['title'],'en'=>$en])))return _res(2);
-      $art->save($data);
-      $aid = $art->id;
+      if(!empty(Article::get(['title'=>$articleData['title'],'en'=>$en])))return _res(2);
+      $art->save($articleData);
+      $aid = $articleModel->id;
       if($aid>0){
-        (new ArticleInfo)->save(['aid'=>$aid,'info'=>$info]);
+        (new ArticleInfo)->save(['aid'=>$aid,'info'=>$articleInfo]);
         Cache::rm($en);
         for($i=1;$i<ceil($count/config('page_size'))+2;$i++){
           Cache::rm($en.$i);
         }
-        Cache::set('a_'.$aid,['data'=>$dcache,'title'=>$data['title']]);
+        Cache::set('a_'.$aid,['data'=>$articleCache,'title'=>$articleData['title']]);
         return _res(1,$aid);
       }
     }

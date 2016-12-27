@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 namespace app\admin\controller;
-use think\Controller;
+use app\admin\controller\Entry;
 use think\Request;
 use app\admin\model\Article;
-final class Edit extends Controller
+final class Edit extends Entry
 {
   public function __construct(){
     if(empty(session('uid')))$this->redirect('/login');

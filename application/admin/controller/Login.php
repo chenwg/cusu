@@ -1,8 +1,9 @@
 <?php
 namespace app\admin\controller;
+use app\admin\controller\Entry;
 use think\Request;
 use app\admin\model\User;
-final class Login
+final class Login extends Entry
 {
   public function index(){
     return view('login/login',[]);

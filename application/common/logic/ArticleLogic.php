@@ -1,5 +1,5 @@
 <?php
-namespace app\home\logic;
+namespace app\common\logic;
 use think\Request;
 class ArticleLogic{
 

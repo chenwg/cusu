@@ -47,7 +47,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
           <div class="file-input file-input-ajax-new">
           <div class="file-preview-thumbnails">
             <div id="imgPreview" class="file-live-thumbs">
-              {volist name="$article.img" id='img'}
+              {volist name='$article.img' id='img'}
               <div class="file-preview-frame file-preview-success" data-fileindex="-1" data-template="image">
                 <div class="kv-file-content">
                   <a href="{$img}" target="_blank"><img src="{$img}" class="imgSrc" style="width:auto;height:160px;"></a>
@@ -56,7 +56,6 @@ body{font-family: '微软雅黑';background-color: #ddd}
                   <div class="file-thumb-progress"></div><div class="file-actions">
                     <div class="file-footer-buttons">
                       <button type="button" class="kv-file-remove btn btn-xs btn-default" title="删除文件" onclick="picmove(this)"><i class="glyphicon glyphicon-trash text-danger"></i></button>
-
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -126,7 +125,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
     var html1 = '<div class="file-preview-frame file-preview-success" data-fileindex="-1" data-template="image"><div class="kv-file-content">';
     $("#fileImages").fileinput({
       language: 'zh',
-      showPreview: true,
+      showPreview: false,
       uploadUrl:'/fileupload',
       allowedFileExtensions:['jpg','png','gif'],
       overwriteInitial:false,
@@ -136,10 +135,16 @@ body{font-family: '微软雅黑';background-color: #ddd}
       slugCallback:function(filename){
         return filename.replace('(', '_').replace(']', '_');
       }
-    }).on('fileuploaded',function(e,data){
-      var img = data.response.susname;
-      var imghtml = html1 + '<a href="' + img +'" target="_blank"><img class="imgSrc" src="' + img + '" style="width:auto;height:160px;"></a>' + $('#lahtml').html();
-      $('#imgPreview').append(imghtml);
+      }).on('filebatchselected', function(event, files) {
+        $(this).fileinput('upload');
+      }).on('fileuploaded',function(e,data){
+        if(!data.response.err){
+          var img = data.response.susname;
+          var imghtml = html1 + '<a href="' + img +'" target="_blank"><img class="imgSrc" src="' + img + '" style="width:auto;height:160px;"></a>' + $('#lahtml').html();
+          $('#imgPreview').append(imghtml);
+        }else{
+          alert(data.response.err);
+        }
     })
     </script>
     <script>
@@ -178,7 +183,6 @@ body{font-family: '微软雅黑';background-color: #ddd}
               layer.msg('编辑成功', {icon: 1});
             }else{
               layer.msg('新增成功', {icon: 1},function(){
-                //window.location.href = '/bj/id/'+res.i;
                 window.location.reload();
               });
             }
@@ -186,7 +190,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
             layer.msg('标题重复，请更改标题', {icon: 2});
           }else{
             console.log(res.i)
-            //layer.msg('提交失败，请稍后重试', {icon: 2});
+            layer.msg('提交失败，请稍后重试', {icon: 2});
           }
         })
       })

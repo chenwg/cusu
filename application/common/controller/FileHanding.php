@@ -13,14 +13,15 @@ class FileHanding extends Controller
     //Hi man ======================== My name is chenWeiguang
   }
   public function img_upload(){
-    $files = $_FILES['suFiles'];
-    if($files['size'][0] > 501*1024)return json(['susname'=>'','error'=>$files['name'][0].'图片大小不能大于500k']);
-    if(!in_array($files['type'][0],['image/jpeg','image/jpg','image/png','image/gif']))return json(['susname'=>'','error'=>$files['name'][0].'图片格式不正确']);
-    $fname = md5(time().$files['name'][0]).'.'.pathinfo($files['name'][0],PATHINFO_EXTENSION);
-    if(move_uploaded_file($files['tmp_name'][0],'files'.'/'.$fname))
-        return json(['susname'=>'/files'.'/'.$fname,'error'=>false]);
-      else
-        return json(['susname'=>'','error'=>'']);
+    $file = $_FILES['suFiles'];
+    if($file['size'][0] > 501*1024)return json(['susname'=>'','err'=>$file['name'][0].'图片大小不能大于500k']);
+    if(!in_array($file['type'][0],['image/jpeg','image/jpg','image/png','image/gif']))return json(['susname'=>'','err'=>$file['name'][0].'图片格式不正确']);
+    $fileName = md5(time().$file['name'][0]).'.'.pathinfo($file['name'][0],PATHINFO_EXTENSION);
+    if(move_uploaded_file($file['tmp_name'][0],'files'.'/'.$fileName)){
+      return json(['susname'=>'/files'.'/'.$fileName,'err'=>false]);
+    }else{
+      return json(['susname'=>'','err'=>'444']);
+    }
   }
   //word===================================================
   public function word_export(string $content=null){

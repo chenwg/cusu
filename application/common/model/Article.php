@@ -39,17 +39,16 @@ class Article extends Model
     ->where($condition)->find()->toArray();
   }
   public static function pageArticle(array $condition,int $page=0,string $res = null){
-    $mod = Article::where($condition)->paginate($page>0 ? $page : config('page_size'));
-    return ($res == null) ? $mod : $mod->toArray();
+    $resObject = Article::where($condition)->paginate($page>0 ? $page : config('page_size'));
+    return ($res == null) ? $resObject : $resObject->toArray();
   }
-  public static function search(string $kw,int $page=0){
-    $kw = strtr(urldecode($kw), array(' '=>''));
+  public static function search(string $keywords,int $page=0){
+    $keywords = strtr(urldecode($keywords), array(' '=>''));
     if(config('full_text')){
       //fenci
-      $data = [];
+      return [];
     }else{
-      $data = Article::where('title|profile','like','%'.$kw.'%')->paginate($page>0 ? $page : config('page_size'));
+      return Article::where('title|profile','like','%'.$keywords.'%')->paginate($page>0 ? $page : config('page_size'));
     }
-    return $data;
   }
 }
