@@ -5,10 +5,12 @@ use think\Request;
 class Img{
   public function res(Request $req){
     $filename = $req->get('fp');
-    if(empty($filename)){
-      readfile('files/106ecbacdcc774b5c2ee6686ba2d4b5c.jpg');
-    }
     ob_end_clean();
+    if(empty($filename)){
+      header('Content-Type:image/jpg');
+      readfile('files/106ecbacdcc774b5c2ee6686ba2d4b5c.jpg');
+      exit;
+    }
     if(preg_match('/^(http:\/\/|https:\/\/).*$/',$filename)){
       header('location:'.$filename);
     }else{
