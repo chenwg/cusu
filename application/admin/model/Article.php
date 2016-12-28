@@ -24,17 +24,16 @@ class Article extends Particle
   public static function s(string $keywords,int $page=0):array{
     return self::search($keywords,$page);
   }
-  public static function inArticle(int $id=0,array $articleData,string $articleInfo=''){
-    if(!empty($articleData['curl']) && empty($articleData['title'])){
-      $articleData['title'] = (new \app\common\controller\Reptile())->get_title($articleData['curl']);
+  public static function inArticle(int $id=0,array $articleData,string $articleInfo=null){
+    $htmlInfo = $articleInfo;
+    if(!empty($articleData['curl'])){
+      $htmlInfo = (new \app\common\controller\Reptile())->get_html($articleData['curl']);
+      if(empty($articleData['title'])){
+        $articleData['title'] = (new \app\common\controller\Reptile())->get_title($articleData['curl'],$htmlInfo);
+      }
     }
-    if(empty($articleData['img1']) && !empty($articleInfo)){
-      $pattern = '/<img.*?src="(.*?)".*?>/i';
-      preg_match_all($pattern,$articleInfo,$match);
-      isset($match[1][0]) && $articleData['img1'] = $match[1][0];
-      isset($match[1][1]) && $articleData['img2'] = $match[1][1];
-      isset($match[1][2]) && $articleData['img3'] = $match[1][2];
-      isset($match[1][3]) && $articleData['img4'] = $match[1][3];
+    if(empty($articleData['img1']) && !empty($htmlInfo)){
+      $articleData = get_img($htmlInfo,$articleData);
     }
     $articleModel = new Article;
     $en = $articleData['en'];
@@ -42,28 +41,29 @@ class Article extends Particle
     $count = $articleModel->where(['en'=>$en,'is_delete'=>0])->count();
     if($id>0){
       $resRow = $articleModel->where('id',$id)->update($articleData);
-      $resRowInfo = (new ArticleInfo)->where('aid',$id)->update(['info'=>$info]);
+      $resRowInfo = (new ArticleInfo)->where('aid',$id)->update(['info'=>$articleInfo]);
       if($resRow > 0 || $resRowInfo > 0){
-        Cache::rm('a_'.$id);
         Cache::set('a_'.$id,['data'=>$articleCache,'title'=>$articleData['title']]);
         file_exists('word/'.md5('a_'.$id).'.doc') && unlink('word/'.md5('a_'.$id).'.doc');
       }
       if($resRow > 0){
         $articleOne = $articleModel->where('id',$id)->find();
         Cache::rm($en);
+        for($i=1;$i<ceil($count/config('page_size'))+2;$i++){
+          Cache::rm($en.$i);
+        }
         if($articleOne['en'] != $en){
           Cache::rm($articleOne['en']);
           $countold = $articleModel->where('en',$articleOne['en'])->count();
-          for($i=1,$j=1;$i<ceil($countold/config('page_size'))+2,$j<ceil($count/config('page_size'))+2;$i++,$j++){
-            Cache::rm($articleOne['en'].$i);
-            Cache::rm($en.$j);
+          for($j=1;$j<ceil($countold/config('page_size'))+2;$j++){
+            Cache::rm($articleOne['en'].$j);
           }
         }
       }
       return _res(1);
     }else{
       if(!empty(Article::get(['title'=>$articleData['title'],'en'=>$en])))return _res(2);
-      $art->save($articleData);
+      $articleModel->save($articleData);
       $aid = $articleModel->id;
       if($aid>0){
         (new ArticleInfo)->save(['aid'=>$aid,'info'=>$articleInfo]);

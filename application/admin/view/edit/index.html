@@ -154,7 +154,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
           layer.tips('请输入标题','#title',{tips: [3, '#39BDF9']});
           return false;
         }
-        if($('#curl').val() != '' && !$('#curl').val().match(/(http[s]?|ftp):\/\/[^\/\.]+?\..+\w$/i)){
+        if($('#curl').val() != '' && !$('#curl').val().match(/(http[s]?|ftp):\/\/[^\/\.]+?\..+\w/i)){
           layer.tips('请输入正确的外链地址','#curl',{tips: [3, '#39BDF9']});
           return false;
         }
@@ -177,7 +177,6 @@ body{font-family: '微软雅黑';background-color: #ddd}
           id:id
         },
         function(res){
-          console.log(res)
           if(res.s == 1){
             if(id > 0){
               layer.msg('编辑成功', {icon: 1});
@@ -190,7 +189,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
             layer.msg('标题重复，请更改标题', {icon: 2});
           }else{
             console.log(res.i)
-            layer.msg('提交失败，请稍后重试', {icon: 2});
+            //layer.msg('提交失败，请稍后重试', {icon: 2});
           }
         })
       })

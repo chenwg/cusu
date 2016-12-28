@@ -11,6 +11,7 @@ return [
     'article/s'=>['home/article/s',['method'=>'get']],
     //'article'=>['home/article/res',['method'=>'get','cache'=>3600]],
     'article/'=>['home/article/res',['method'=>'get']],
+    'img'=>['api/img/res',['method'=>'get']],
     'login'=>['admin/login/index',['method'=>'get']],
     'in'=>['admin/login/login',['method'=>'post']],
     'bj'=>['admin/edit/index',['method'=>'get']],

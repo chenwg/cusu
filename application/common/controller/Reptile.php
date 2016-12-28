@@ -5,8 +5,10 @@ use think\Controller;
 class Reptile extends Controller
 {
   protected $p;
-  public function get_title(string $curl):string{
-    $html = $this->get_html($curl);
+  public function get_title(string $curl,string $html=''):string{
+    if(empty($html)){
+      $html = $this->get_html($curl);
+    }
     if(!$html)return substr($curl,0,30);
     $encode = mb_detect_encoding($html);
 		if(!$encode || strtolower($encode) != 'utf-8')$html = mb_convert_encoding($html,'UTF-8');
@@ -26,13 +28,14 @@ class Reptile extends Controller
     curl_close($ch);
     return $res;
   }
-  private function get_html($curl){
+  public function get_html($curl){
     $ch = curl_init($curl);
     curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);//跳过https验证
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     curl_setopt($ch,CURLOPT_BINARYTRANSFER,true);
     $res = curl_exec($ch);
     curl_close($ch);
-    return $res;
+    if(!$res)return '';
+    return mb_convert_encoding($res,'UTF-8');
   }
 }

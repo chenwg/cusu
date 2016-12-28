@@ -14,7 +14,7 @@ final class Edit extends Entry
     if($id>0){
       $article = Article::joinImgInfo(['id'=>$id]);
       $article['img'] = [$article['img1'],$article['img2'],$article['img3'],$article['img4']];
-      array_filter($article['img']);
+      $article['img'] = array_filter($article['img']);
     }
     return view('',['article'=>$article]);
   }

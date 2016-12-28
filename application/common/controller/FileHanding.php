@@ -18,7 +18,7 @@ class FileHanding extends Controller
     if(!in_array($file['type'][0],['image/jpeg','image/jpg','image/png','image/gif']))return json(['susname'=>'','err'=>$file['name'][0].'图片格式不正确']);
     $fileName = md5(time().$file['name'][0]).'.'.pathinfo($file['name'][0],PATHINFO_EXTENSION);
     if(move_uploaded_file($file['tmp_name'][0],'files'.'/'.$fileName)){
-      return json(['susname'=>'/files'.'/'.$fileName,'err'=>false]);
+      return json(['susname'=>'/img?fp='.$fileName,'err'=>false]);
     }else{
       return json(['susname'=>'','err'=>'444']);
     }

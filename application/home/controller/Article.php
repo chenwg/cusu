@@ -10,7 +10,6 @@ final class Article extends Entry
   public function __construct(){
     parent::__construct();
   }
-
   public function res(string $en='suibi',int $id=0){
     if($id>0){
       $data = self::getInfoById($id);
