@@ -25,7 +25,7 @@ class Article extends Particle
   public static function s(string $keywords,int $page=0):array{
     return self::search($keywords,$page);
   }
-  
+
   public static function inArticle(int $id=0,array $articleData,string $articleInfo=null){
     $htmlInfo = $articleInfo;
     if(!empty($articleData['curl'])){
@@ -73,6 +73,7 @@ class Article extends Particle
         for($i=1;$i<ceil($count/config('page_size'))+2;$i++){
           Cache::rm($en.$i);
         }
+        $articleCache['id'] = $aid;
         Cache::set('a_'.$aid,['data'=>$articleCache,'title'=>$articleData['title']]);
         return _res(1,$aid);
       }

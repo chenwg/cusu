@@ -36,8 +36,10 @@ final class Article extends Entry
   }
 
   public function export_pdf(int $id=0){
-    $data = self::getInfoById($id);
-    return export(2,$id,$data['data']);
+    if($id>0){
+      $data = self::getInfoById($id);
+      return export(2,$id,$data['data']);
+    }
   }
 
   public function s(Request $req){
