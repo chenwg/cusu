@@ -48,7 +48,8 @@ class Article extends Model
       //fenci
       return [];
     }else{
-      return Article::where('title|profile','like','%'.$keywords.'%')->paginate($page>0 ? $page : config('page_size'));
+      return Article::where('title|profile','like','%'.$keywords.'%')
+      ->paginate($page>0 ? $page : config('page_size'),false,['query' =>array('kw'=>$keywords,'coding'=>'utf-8')]);
     }
   }
 }
