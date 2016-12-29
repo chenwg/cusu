@@ -25,6 +25,7 @@ class FileHanding extends Controller
   }
   //word===================================================
   public function word_export(string $content=null){
+    ob_end_clean();
     ob_start();
     echo '<html xmlns:o="urn:schemas-microsoft-com:office:office"',
     'xmlns:w="urn:schemas-microsoft-com:office:word"',
@@ -40,15 +41,63 @@ class FileHanding extends Controller
   //
   public function pdf_export($data){
     ///bug bug -----------------============================bug
-    $ch = curl_init();
-    curl_setopt($ch,CURLOPT_URL,$_SERVER['SERVER_NAME'].'/tct/cnex.php');
-    curl_setopt($ch,CURLOPT_POST,count($data));
-    curl_setopt($ch,CURLOPT_HEADER,0);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-    curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
-    $res = curl_exec($ch);
-    curl_close($ch);
-    return $res;
+    vendor('Tcpdf.tcpdf');
+    $pdf = new \Tcpdf(PDF_PAGE_ORIENTATION,PDF_UNIT,PDF_PAGE_FORMAT,true,'UTF-8',false);
+    ob_end_clean();
+    // set document information
+    $pdf->SetCreator(PDF_CREATOR);
+    $pdf->SetAuthor('chenWeiguang');
+    $pdf->SetTitle($data['title']);
+    $pdf->SetSubject('');
+    $pdf->SetKeywords('');
+
+    // set default header data
+    //$pdf->setPrintHeader(false);
+    $pdf->SetHeaderMargin('1');
+    $pdf->SetHeaderData(false,0, 'CusuCms V1.0.0');
+
+    // set header and footer fonts
+    //$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+    $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+    // set default monospaced font
+    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+    // set margins
+    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+    // set auto page breaks
+    $pdf->SetAutoPageBreak(TRUE,'3');
+
+    // set image scale factor
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+    // set some language-dependent strings (optional)
+    if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
+      require_once(dirname(__FILE__).'/lang/eng.php');
+      $pdf->setLanguageArray($l);
+    }
+
+    // ---------------------------------------------------------
+
+    // set font
+    $pdf->SetFont('stsongstdlight', '', 16);
+
+    // add a page
+    $pdf->AddPage();
+
+    $title = '<p style="font-weight:bold">'.$data['title'].'</p>';
+    $pdf->WriteHTML($title,true,0,true,0);
+    // set font
+    $pdf->SetFont('stsongstdlight', '', 13);
+    $txt = $data['info'];
+
+    $pdf->WriteHTML($txt,true,0,true,0);
+
+    //Close and output PDF document
+    $pdf->Output(md5($data['title'].$data['id']).'.pdf', 'D');
   }
 
   //pdf=====================================================

@@ -15,6 +15,7 @@
   {$data.info}
   <div style="margin-left:115px;margin-top:20px;color:#ff0000"><a href="javascript:;" onclick="Preview()">打印这篇文章</a></div>
   <div style="margin-left:115px;color:#ff0000"><a href="/home/article/export_word/id/{$data.id}">导出为word</a></div>
+  <div style="margin-left:115px;color:#ff0000"><a href="/home/article/export_pdf/id/{$data.id}">导出为pdf</a></div>
   {else/}
   {volist name="data" id='vo'}
    <div class="list-group-item">

@@ -10,6 +10,7 @@ final class Article extends Entry
   public function __construct(){
     parent::__construct();
   }
+
   public function res(string $en='suibi',int $id=0){
     if($id>0){
       $data = self::getInfoById($id);
@@ -23,6 +24,7 @@ final class Article extends Entry
     }
     return view('article/article'.$this->tpl,$data);
   }
+
   //$id=0
   public function export_word(int $id=0){
     if($id>0){
@@ -32,6 +34,12 @@ final class Article extends Entry
     }
     return 'error';
   }
+
+  public function export_pdf(int $id=0){
+    $data = self::getInfoById($id);
+    return export(2,$id,$data['data']);
+  }
+
   public function s(Request $req){
     return view('article/article'.$this->tpl,
     empty($req->param('kw')) ? ['data'=>null,'title'=>config('s')] : ArticleM::s($req->param('kw')));

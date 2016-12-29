@@ -21,9 +21,11 @@ class Article extends Particle
     }
     return _res(1);
   }
+
   public static function s(string $keywords,int $page=0):array{
     return self::search($keywords,$page);
   }
+  
   public static function inArticle(int $id=0,array $articleData,string $articleInfo=null){
     $htmlInfo = $articleInfo;
     if(!empty($articleData['curl'])){
