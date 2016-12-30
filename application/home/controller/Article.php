@@ -40,6 +40,7 @@ final class Article extends Entry
       $data = self::getInfoById($id);
       return export(2,$id,$data['data']);
     }
+    return 'error';
   }
 
   public function s(Request $req){
@@ -49,11 +50,11 @@ final class Article extends Entry
 
   //-==========================
   private static function getInfoById(int $id=0):array{
-    $data = Cache::get('a_'.$id);
+    $data = Cache::get(config('mdp').$id);
     if(empty($data)){
       $article = ArticleM::joinInfo(['id'=>$id]);
       $data = ['data'=>$article,'title'=>$article['title']];
-      Cache::set('a_'.$id,$data);
+      Cache::set(config('mdp').$id,$data);
     }
     return $data;
   }

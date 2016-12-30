@@ -24,17 +24,24 @@ function img_upload(){
 }
 
 function get_img($htmlInfo,$articleData){
-  $pattern = '/<img.*?src="(.*?)".*?>/';
+  //$pattern = '/<img.*?src="(.*?)".*?/';
+  $pattern = '/<img.*?src="(.*?)"/';
   preg_match_all($pattern,$htmlInfo,$match);
   $imgArray = [];
   $curlArray = parse_url($articleData['curl']);
   foreach($match[1] as $v){
     if(count($imgArray) == 4)break;
-    if(preg_match('/^(http:\/\/|https:\/\/).*$/',$v)){
-      array_push($imgArray,$v);
+    if(preg_match('/^(http:\/\/|https:\/\/).*$/',$v) && check_url($v)){
+      $img = @getimagesize($v);//有安全隐患，别人可通过超大文件植入shell，后期处理
+      if($img && $img[0] > config('src_pic_min_width') && $img[0] < 1300 && $img[1] < 1000){
+        array_push($imgArray,$v);
+      }
     }else{
-      if(count($curlArray) > 1 && isset($curlArray['scheme'])){
-        array_push($imgArray,$curlArray['scheme'].$curlArray['host'].'/'.$v);
+      if(count($curlArray) > 1 && isset($curlArray['scheme']) && check_url($curlArray['scheme'].$curlArray['host'].'/'.$v)){
+        $img = @getimagesize($curlArray['scheme'].$curlArray['host'].'/'.$v);
+        if($img && $img[0] > config('src_pic_min_width') && $img[0] < 1300 && $img[1] < 1000){
+          array_push($imgArray,$curlArray['scheme'].$curlArray['host'].'/'.$v);
+        }
       }
     }
   }
@@ -66,9 +73,7 @@ function check_url($url){
 
 
 function get_domain($url){
-  return true;
-  //$pattern = '/[w-].(com|net|org|gov|cc|biz|info|cn)(.(cn|hk))*/';
-  /*
+  $pattern = '/[w-].(com|net|org|gov|cc|biz|info|cn)(.(cn|hk))*/';
   preg_match($pattern, $url, $matches);
   if(count($matches) > 0) {
     return $matches[0];
@@ -89,5 +94,4 @@ function get_domain($url){
       return $domain;
     }
   }
-  */
 }

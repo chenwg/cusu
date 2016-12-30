@@ -50,52 +50,39 @@ class FileHanding extends Controller
     $pdf->SetTitle($data['title']);
     $pdf->SetSubject('');
     $pdf->SetKeywords('');
-
     // set default header data
     //$pdf->setPrintHeader(false);
     $pdf->SetHeaderMargin('1');
     $pdf->SetHeaderData(false,0, 'CusuCms V1.0.0');
-
     // set header and footer fonts
     //$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
     $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-
     // set default monospaced font
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
     // set margins
-    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-
+    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT,'30');
+    $pdf->SetHeaderMargin('8');
+    $pdf->SetFooterMargin('5');
     // set auto page breaks
     $pdf->SetAutoPageBreak(TRUE,'3');
-
     // set image scale factor
     $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
     // set some language-dependent strings (optional)
     if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
       require_once(dirname(__FILE__).'/lang/eng.php');
       $pdf->setLanguageArray($l);
     }
-
     // ---------------------------------------------------------
-
     // set font
     $pdf->SetFont('stsongstdlight', '', 16);
-
     // add a page
     $pdf->AddPage();
-
     $title = '<p style="font-weight:bold">'.$data['title'].'</p>';
     $pdf->WriteHTML($title,true,0,true,0);
     // set font
     $pdf->SetFont('stsongstdlight', '', 13);
     $txt = $data['info'];
-
     $pdf->WriteHTML($txt,true,0,true,0);
-
     //Close and output PDF document
     $pdf->Output(md5($data['title'].$data['id']).'.pdf', 'D');
   }

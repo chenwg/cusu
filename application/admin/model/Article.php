@@ -28,13 +28,13 @@ class Article extends Particle
 
   public static function inArticle(int $id=0,array $articleData,string $articleInfo=null){
     $htmlInfo = $articleInfo;
-    if(!empty($articleData['curl'])){
+    if($id == 0 && !empty($articleData['curl'])){
       $htmlInfo = (new \app\common\controller\Reptile())->get_html($articleData['curl']);
       if(empty($articleData['title'])){
         $articleData['title'] = (new \app\common\controller\Reptile())->get_title($articleData['curl'],$htmlInfo);
       }
     }
-    if(empty($articleData['img1']) && !empty($htmlInfo)){
+    if($id == 0 && empty($articleData['img1']) && !empty($htmlInfo)){
       $articleData = get_img($htmlInfo,$articleData);
     }
     $articleModel = new Article;
@@ -45,8 +45,8 @@ class Article extends Particle
       $resRow = $articleModel->where('id',$id)->update($articleData);
       $resRowInfo = (new ArticleInfo)->where('aid',$id)->update(['info'=>$articleInfo]);
       if($resRow > 0 || $resRowInfo > 0){
-        Cache::set('a_'.$id,['data'=>$articleCache,'title'=>$articleData['title']]);
-        file_exists('word/'.md5('a_'.$id).'.doc') && unlink('word/'.md5('a_'.$id).'.doc');
+        Cache::set(config('mdp').$id,['data'=>$articleCache,'title'=>$articleData['title']]);
+        file_exists('word/'.md5(config('mdp').$id).'.doc') && unlink('word/'.md5(config('mdp').$id).'.doc');
       }
       if($resRow > 0){
         $articleOne = $articleModel->where('id',$id)->find();
@@ -64,7 +64,7 @@ class Article extends Particle
       }
       return _res(1);
     }else{
-      if(!empty(Article::get(['title'=>$articleData['title'],'en'=>$en])))return _res(2);
+      if(!empty(Article::get(['title'=>$articleData['title'],'en'=>$en,'is_delete'=>0])))return _res(2);
       $articleModel->save($articleData);
       $aid = $articleModel->id;
       if($aid>0){
@@ -74,7 +74,7 @@ class Article extends Particle
           Cache::rm($en.$i);
         }
         $articleCache['id'] = $aid;
-        Cache::set('a_'.$aid,['data'=>$articleCache,'title'=>$articleData['title']]);
+        Cache::set(config('mdp').$aid,['data'=>$articleCache,'title'=>$articleData['title']]);
         return _res(1,$aid);
       }
     }
