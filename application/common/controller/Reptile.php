@@ -10,10 +10,8 @@ class Reptile extends Controller
       $html = $this->get_html($curl);
     }
     if(!$html)return substr($curl,0,30);
-    $encode = mb_detect_encoding($html);
-		if(!$encode || strtolower($encode) != 'utf-8')$html = mb_convert_encoding($html,'UTF-8');
     preg_match('/<title>(.*)<\/title>/i',$html,$title);
-    if(isset($title[1]))return $title[1];
+    if(isset($title[1]) && !empty($title[1]))return $title[1];
     return substr($curl,0,30);
   }
   private function post_html(string $curl,array $param = []){
@@ -35,7 +33,7 @@ class Reptile extends Controller
     curl_setopt($ch,CURLOPT_BINARYTRANSFER,true);
     $res = curl_exec($ch);
     curl_close($ch);
-    if(!$res)return '';
-    return mb_convert_encoding($res,'UTF-8');
+    if(!$res)return false;
+    return mb_convert_encoding($res,'utf-8','GBK,UTF-8,ASCII,gb18030,UTF-16LE');
   }
 }
