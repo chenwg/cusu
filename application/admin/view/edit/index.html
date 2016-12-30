@@ -97,15 +97,15 @@ body{font-family: '微软雅黑';background-color: #ddd}
       </div>
     </section>
     <script id="lahtml">
-    </div><div class="file-thumbnail-footer">
-    <div class="file-thumb-progress"></div><div class="file-actions">
-    <div class="file-footer-buttons">
-    <button type="button" class="kv-file-remove btn btn-xs btn-default" title="删除文件" onclick="picmove(this)"><i class="glyphicon glyphicon-trash text-danger"></i></button>
-    </div>
-    <div class="clearfix"></div>
-    </div>
-    </div>
-    </div>
+      </div><div class="file-thumbnail-footer">
+      <div class="file-thumb-progress"></div><div class="file-actions">
+      <div class="file-footer-buttons">
+      <button type="button" class="kv-file-remove btn btn-xs btn-default" title="删除文件" onclick="picmove(this)"><i class="glyphicon glyphicon-trash text-danger"></i></button>
+      </div>
+      <div class="clearfix"></div>
+      </div>
+      </div>
+      </div>
     </script>
 
     <script src="/static/11/js/jquery-2.1.1.min.js"></script>
@@ -163,15 +163,12 @@ body{font-family: '微软雅黑';background-color: #ddd}
         $('.imgSrc').each(function(){
           imgArr.push($(this).attr('src'));
         })
-        layer.msg('努力提交中',{
-          icon: 16,
-          shade: 0.3,
-          time:0
-        });
-        $.ajax({
-          url:'/add',
-          type:'POST',
-          data:{
+          layer.msg('努力提交中',{
+            icon: 16,
+            shade: 0.3,
+            time:0
+          });
+          $.post('/add',{
             title:$('#title').val(),
             info:$('#info').val(),
             profile:$('#profile').val(),
@@ -182,56 +179,23 @@ body{font-family: '微软雅黑';background-color: #ddd}
             img3:imgArr[2],
             img4:imgArr[3],
             id:id
-          },
-          success:function(res){
-                  layer.close();
-                  if(res.s == 1){
-                    if(id > 0){
-                      layer.msg('编辑成功', {icon: 1,shade: 0.3});
-                    }else{
-                      layer.msg('新增成功', {icon: 1,shade: 0.3},function(){
-                        window.location.reload();
-                      });
-                    }
-                  }else if(res.s == 2){
-                    layer.msg('标题重复，请更改标题', {icon: 2,shade: 0.3});
-                  }else{
-                    console.log(res.i)
-                    //layer.msg('提交失败，请稍后重试', {icon: 2});
-                  }
-                }
-        })
-        /*
-        $.post('/add',
-        {
-          title:$('#title').val(),
-          info:$('#info').val(),
-          profile:$('#profile').val(),
-          en:$('#en').val(),
-          curl:$('#curl').val(),
-          img1:imgArr[0],
-          img2:imgArr[1],
-          img3:imgArr[2],
-          img4:imgArr[3],
-          id:id
-        },
-        function(res){
-          if(res.s == 1){
-            if(id > 0){
-              layer.msg('编辑成功', {icon: 1});
+          },function(res){
+            layer.close();
+            if(res.s == 1){
+              if(id > 0){
+                layer.msg('编辑成功', {icon: 1,shade: 0.3});
+              }else{
+                layer.msg('新增成功', {icon: 1,shade: 0.3},function(){
+                  window.location.reload();
+                });
+              }
+            }else if(res.s == 2){
+              layer.msg('标题重复，请更改标题', {icon: 2,shade: 0.3});
             }else{
-              layer.msg('新增成功', {icon: 1},function(){
-                window.location.reload();
-              });
+              console.log(res.i)
+              layer.msg('提交失败，请稍后重试', {icon: 2});
             }
-          }else if(res.s == 2){
-            layer.msg('标题重复，请更改标题', {icon: 2});
-          }else{
-            console.log(res.i)
-            //layer.msg('提交失败，请稍后重试', {icon: 2});
-          }
-        })
-        */
+          })
       })
     })
     </script>
