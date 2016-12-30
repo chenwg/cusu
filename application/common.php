@@ -64,6 +64,8 @@ function check_http($url){
 function check_url($url){
   $ch = curl_init($url);
   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
+  curl_setopt($ch,CURLOPT_ENCODING,'gzip');
+  curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
   curl_setopt($ch,CURLOPT_NOBODY,true);
   $result = curl_exec($ch);
   $status = curl_getinfo($ch,CURLINFO_HTTP_CODE);
