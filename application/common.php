@@ -24,7 +24,6 @@ function img_upload(){
 }
 
 function get_img($htmlInfo,$articleData){
-  //$pattern = '/<img.*?src="(.*?)".*?/';
   $pattern = '/<img.*?src="(.*?)"/';
   preg_match_all($pattern,$htmlInfo,$match);
   $imgArray = [];
@@ -42,6 +41,10 @@ function get_img($htmlInfo,$articleData){
         if($img && $img[0] > config('src_pic_min_width') && $img[0] < 1300 && $img[1] < 1000){
           array_push($imgArray,$curlArray['scheme'].$curlArray['host'].'/'.$v);
         }
+        continue;
+      }
+      if(substr($v,0,2) == '//' && count($curlArray) > 1 && isset($curlArray['scheme']) && check_url($curlArray['scheme'].$v)){
+        array_push($imgArray,$curlArray['scheme'].$v);
       }
     }
   }
