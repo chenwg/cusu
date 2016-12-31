@@ -8,6 +8,9 @@ function _res($s=0,$i=null){
   return json(['s'=>$s,'i'=>$i]);
 }
 
+function _utf8($res){
+  return mb_convert_encoding($res,'utf-8','GBK,UTF-8,ASCII,gb18030,UTF-16LE');
+}
 function _md($p){
   return md5(md5($p.'vkii').'vs');
 }

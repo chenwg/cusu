@@ -9,7 +9,7 @@ class Reptile extends Controller
     if(empty($html)){
       $html = $this->get_html($curl);
     }
-    if(!$html)return substr($curl,0,30);
+    if(empty($html))return substr($curl,0,30);
     preg_match('/<title>(.*)<\/title>/i',$html,$title);
     if(isset($title[1]) && !empty($title[1]))return $title[1];
     return substr($curl,0,30);
@@ -38,6 +38,6 @@ class Reptile extends Controller
     $res = curl_exec($ch);
     curl_close($ch);
     if(!$res)return '';
-    return mb_convert_encoding($res,'utf-8','GBK,UTF-8,ASCII,gb18030,UTF-16LE');
+    return _utf8($res);
   }
 }

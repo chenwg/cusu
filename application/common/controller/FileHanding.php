@@ -24,13 +24,13 @@ class FileHanding extends Controller
     }
   }
   //word===================================================
-  public function word_export(string $content=null){
+  public function word_export(string $content = ''){
     ob_end_clean();
     ob_start();
     echo '<html xmlns:o="urn:schemas-microsoft-com:office:office"',
     'xmlns:w="urn:schemas-microsoft-com:office:word"',
     'xmlns="http://www.w3.org/TR/REC-html40">',
-    iconv('UTF-8','GB2312',$content),
+    _utf8($content),
     '</html>';
     $this->save_file();
     return file_exists($this->path) ? $this->redirect('/'.$this->path) : '文件不存在';
