@@ -20,7 +20,7 @@ return [
     //分词检索开启标志
     'full_text'=>false,
     //分页
-    'page_size'=>2,
+    'page_size'=>3,
     //软删除
     'soft_delete'=>true,
     // 应用命名空间

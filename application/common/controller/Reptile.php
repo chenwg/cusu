@@ -37,7 +37,7 @@ class Reptile extends Controller
     curl_setopt($ch,CURLOPT_BINARYTRANSFER,true);
     $res = curl_exec($ch);
     curl_close($ch);
-    if(!$res)return false;
+    if(!$res)return '';
     return mb_convert_encoding($res,'utf-8','GBK,UTF-8,ASCII,gb18030,UTF-16LE');
   }
 }
