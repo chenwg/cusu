@@ -7,7 +7,7 @@ use think\Db;
 class Cate extends Model
 {
   protected static function init(){
-    //no no no no bush
+
   }
   protected static function base($query){
     $query->where('is_delete',0);

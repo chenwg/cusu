@@ -5,7 +5,6 @@ use app\common\model\Article as Particle;
 use think\Cache;
 class Article extends Particle
 {
-
   public static function s(string $keywords,int $page=0):array{
     return self::search($keywords,$page);
   }

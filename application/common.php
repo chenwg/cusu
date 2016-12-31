@@ -28,7 +28,7 @@ function img_upload(){
 function check_img($path){
   if(check_url($path)){
     $img = @getimagesize($path);
-    if($img && $img[0] > config('src_pic_min_width') && $img[1] > 90 && $img[0] < 1300 && $img[1] < 1000){
+    if($img && $img[0] > config('src_pic_min_width') && $img[1] > 90 && $img[0] < 800 && $img[1] < 600){
       return true;
     }
     return false;
@@ -39,7 +39,16 @@ function get_img($htmlInfo,$articleData){
   $pattern = '/<img.*?src="(.*?)"/';
   preg_match_all($pattern,$htmlInfo,$match);
   $imgArray = [];
-  $curlArray = parse_url($articleData['curl']);
+  $curlArray = [];
+  if(!empty($articleData['curl'])){
+    $curlArray = parse_url($articleData['curl']);
+    if(empty($articleData['profile'])){
+      preg_match('/<meta\s+name="description"\s+content="([\w\W]*?)"/si',$htmlInfo,$profile);
+      if(!empty($profile[1])){
+        $articleData['profile'] = $profile[1];
+      }
+    }
+  }
   foreach($match[1] as $v){
     if(count($imgArray) == 4)break;
     if(preg_match('/^(http:\/\/|https:\/\/).*$/',$v)){
