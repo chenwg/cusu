@@ -96,7 +96,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
         </div>
       </div>
     </section>
-    <script id="lahtml">
+    <textarea id="lahtml" style="visibility:hidden;">
       </div><div class="file-thumbnail-footer">
       <div class="file-thumb-progress"></div><div class="file-actions">
       <div class="file-footer-buttons">
@@ -106,7 +106,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
       </div>
       </div>
       </div>
-    </script>
+    </textarea>
 
     <script src="/static/11/js/jquery-2.1.1.min.js"></script>
     <script src="/static/home/js/bootstrap.min.js"></script>
@@ -140,7 +140,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
       }).on('fileuploaded',function(e,data){
         if(!data.response.err){
           var img = data.response.susname;
-          var imghtml = html1 + '<a href="' + img +'" target="_blank"><img class="imgSrc" src="' + img + '" style="width:auto;height:160px;"></a>' + $('#lahtml').html();
+          var imghtml = html1 + '<a href="' + img +'" target="_blank"><img class="imgSrc" src="' + img + '" style="width:auto;height:160px;"></a>' + $('#lahtml').val();
           $('#imgPreview').append(imghtml);
         }else{
           alert(data.response.err);

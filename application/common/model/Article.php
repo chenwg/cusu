@@ -52,4 +52,20 @@ class Article extends Model
       ->paginate($page>0 ? $page : config('page_size'),false,['query' =>array('kw'=>$keywords,'coding'=>'utf-8')]);
     }
   }
+  public static function deleteArticle(int $id,string $en){
+    if(empty('uid'))return _res(0);
+    if(config('soft_delete')){
+      Article::where(['id'=>$id])->update(['is_delete'=>1]);
+    }else{
+      Article::where(['id'=>$id])->delete();
+      ArticleImg::where(['aid'=>$id])->delete();
+      ArticleInfo::where(['aid'=>$id])->delete();
+    }
+    $count = (new Article)->where(['en'=>$en,'is_delete'=>0])->count();
+    Cache::rm($en);
+    for($i=1;$i<ceil($count/config('page_size'))+2;$i++){
+      Cache::rm($en.$i);
+    }
+    return _res(1);
+  }
 }

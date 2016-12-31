@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace app\api\controller;
 use think\Request;
+use think\Db;
 class Img{
   public function res(Request $req){
     $filename = $req->get('fp');

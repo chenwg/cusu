@@ -98,7 +98,7 @@ class FileHanding extends Controller
   private function save_file(){
     $data = ob_get_contents();
     ob_end_clean();
-    $fp = fopen($this->path,'wb+');
+    $fp = @fopen($this->path,'wb+');
     fwrite($fp,$data);
     fclose($fp);
   }

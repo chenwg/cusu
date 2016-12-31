@@ -5,22 +5,6 @@ use app\common\model\Article as Particle;
 use think\Cache;
 class Article extends Particle
 {
-  public static function deleteArticle(int $id,string $en){
-    if(empty('uid'))return _res(0);
-    if(config('soft_delete')){
-      Article::where(['id'=>$id])->update(['is_delete'=>1]);
-    }else{
-      Article::where(['id'=>$id])->delete();
-      ArticleImg::where(['aid'=>$id])->delete();
-      ArticleInfo::where(['aid'=>$id])->delete();
-    }
-    $count = (new Article)->where(['en'=>$en,'is_delete'=>0])->count();
-    Cache::rm($en);
-    for($i=1;$i<ceil($count/config('page_size'))+2;$i++){
-      Cache::rm($en.$i);
-    }
-    return _res(1);
-  }
 
   public static function s(string $keywords,int $page=0):array{
     return self::search($keywords,$page);
