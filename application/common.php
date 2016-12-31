@@ -25,7 +25,16 @@ function export($type,$id,$content){
 function img_upload(){
   return (new \app\common\controller\FileHanding(null))->img_upload();
 }
-
+function check_img($path){
+  if(check_url($path)){
+    $img = @getimagesize($path);
+    if($img && $img[0] > config('src_pic_min_width') && $img[1] > 90 && $img[0] < 1300 && $img[1] < 1000){
+      return true;
+    }
+    return false;
+  }
+  return false;
+}
 function get_img($htmlInfo,$articleData){
   $pattern = '/<img.*?src="(.*?)"/';
   preg_match_all($pattern,$htmlInfo,$match);
@@ -33,23 +42,20 @@ function get_img($htmlInfo,$articleData){
   $curlArray = parse_url($articleData['curl']);
   foreach($match[1] as $v){
     if(count($imgArray) == 4)break;
-    if(preg_match('/^(http:\/\/|https:\/\/).*$/',$v) && check_url($v)){
-      $img = @getimagesize($v);//有安全隐患，别人可通过超大文件植入shell，后期处理
-      if($img && $img[0] > config('src_pic_min_width') && $img[1] > 120 && $img[0] < 1300 && $img[1] < 1000){
+    if(preg_match('/^(http:\/\/|https:\/\/).*$/',$v)){
+      if(check_img($v)){
         array_push($imgArray,$v);
       }
     }else{
-      if(count($curlArray) > 1 && isset($curlArray['scheme']) && check_url($curlArray['scheme'].'://'.$curlArray['host'].$v)){
-        $img = @getimagesize($curlArray['scheme'].'://'.$curlArray['host'].$v);
-        if($img && $img[0] > config('src_pic_min_width') && $img[1] > 120 && $img[0] < 1300 && $img[1] < 1000){
-          array_push($imgArray,$curlArray['scheme'].'://'.$curlArray['host'].$v);
-        }
-      }else{
-        if(substr($v,0,2) == '//' && check_url('http:'.$v)){
+      if(substr($v,0,2) == '//'){
+        if(check_img('http:'.$v)){
           array_push($imgArray,'http:'.$v);
         }
+      }else{
+        if(count($curlArray) > 1 && isset($curlArray['scheme']) && check_img($curlArray['scheme'].'://'.$curlArray['host'].$v)){
+          array_push($imgArray,$curlArray['scheme'].'://'.$curlArray['host'].$v);
+        }
       }
-
     }
   }
   isset($imgArray[0]) && (!empty($imgArray[0])) && $articleData['img1'] = $imgArray[0];
