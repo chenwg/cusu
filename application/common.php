@@ -43,14 +43,10 @@ function get_img($htmlInfo,$articleData){
   foreach($match[1] as $v){
     if(count($imgArray) == 4)break;
     if(preg_match('/^(http:\/\/|https:\/\/).*$/',$v)){
-      if(check_img($v)){
-        array_push($imgArray,$v);
-      }
+      check_img($v) && array_push($imgArray,$v);
     }else{
       if(substr($v,0,2) == '//'){
-        if(check_img('http:'.$v)){
-          array_push($imgArray,'http:'.$v);
-        }
+        check_img('http:'.$v) && array_push($imgArray,'http:'.$v);
       }else{
         if(count($curlArray) > 1 && isset($curlArray['scheme']) && check_img($curlArray['scheme'].'://'.$curlArray['host'].$v)){
           array_push($imgArray,$curlArray['scheme'].'://'.$curlArray['host'].$v);

@@ -22,13 +22,13 @@
   {volist name="data" id='vo'}
    <div class="list-group-item">
        <div class="row">
-           <div class="col-xs-12 col-sm-10">
+           <div class="col-xs-12 col-sm-10" style="width:650px">
                <a href='{if condition="empty($vo.curl)"}/article/id/{$vo.id}{else/}{$vo.curl}{/if}'
-               class="pjax-no" target="_blank"><h4>{$vo.title}</h4>
-               {if condition="!empty($vo.img1)"}<img src="{$vo.img1}" style="width:100px;height:100px;margin-right:5px">{/if}
-               {if condition="!empty($vo.img2)"}<img src="{$vo.img2}" style="width:100px;height:100px;margin-right:5px">{/if}
-               {if condition="!empty($vo.img3)"}<img src="{$vo.img3}" style="width:100px;height:100px;margin-right:5px">{/if}
-               {if condition="!empty($vo.img4)"}<img src="{$vo.img4}" style="width:100px;height:100px;margin-right:5px">{/if}
+               class="pjax-no" target="_blank"><h4><b>{$vo.title}</b></h4>
+               {if condition="!empty($vo.img1)"}<img src="{$vo.img1}" style="width:150px;height:110px;margin-right:5px">{/if}
+               {if condition="!empty($vo.img2)"}<img src="{$vo.img2}" style="width:150px;height:110px;margin-right:5px">{/if}
+               {if condition="!empty($vo.img3)"}<img src="{$vo.img3}" style="width:150px;height:110px;margin-right:5px">{/if}
+               {if condition="!empty($vo.img4)"}<img src="{$vo.img4}" style="width:150px;height:110px;margin-right:5px">{/if}
                </a>
                <p>{$vo.profile}</p>
                {compare name="$Think.session.uid" value="0" type="gt"}
