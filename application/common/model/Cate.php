@@ -13,8 +13,7 @@ class Cate extends Model
     $query->where('is_delete',0);
   }
   public static function getAllCate(){
-    return Cache::get('cusuCate') ??
-      (new \app\common\logic\CateLogic())->infinite_category(Cate::column('*','id'));
+    return Cache::get('cusuCate') ? Cache::get('cusuCate') : (new \app\common\logic\CateLogic())->infinite_category(Cate::where('is_delete',0)->column('*','id'));
   }
 
   public static function getOneCate(int $id):array{

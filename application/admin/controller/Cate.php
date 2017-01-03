@@ -8,6 +8,7 @@ final class Cate extends Entry
 {
   public function add(Request $req){
     if(!$req->isPost()){
+      return json(CateModel::getAllCate());
       return view('cate/index',['cateList'=>CateModel::getAllCate()]);
     }
     return CateModel::insertCate($req->post());
