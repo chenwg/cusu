@@ -30,15 +30,18 @@ class Cate extends Model
   }
 
   public static function insertCate(array $cateData){
-    if(self::valid(['cate_name'=>$cateData['cate_name'],'level'=>$cateData['level']])){
-      return _res(2);
+    if(self::valid(['name'=>$cateData['name'],'level'=>$cateData['level']])){
+      return _res(2,'中文名称重复');
+    }
+    if(self::valid(['en_name'=>$cateData['en_name'],'level'=>$cateData['level']])){
+      return _res(3,'英文名称重复');
     }
     self::cacheAllCate();
-    return (new Cate($cateData))->allowFeild(true)->save();
+    return (new Cate())->allowField(true)->save($cateData) ? _res(1,'新增成功') : _res(0,'提交失败，请重试');
   }
 
   public static function updateCate(array $cateData,array $condition){
-    if(self::valid(['cate_name'=>$cateData['cate_name'],'level'=>$cateData['level'],'id'=>'!='.$condition['id']])){
+    if(self::valid(['name'=>$cateData['name'],'level'=>$cateData['level'],'id'=>'!='.$condition['id']])){
       return _res(2);
     }
     if($cateData['prePath'] != $cateData['path']){
@@ -46,7 +49,7 @@ class Cate extends Model
         $cateData['prePath']."','".$cateData['path']."') WHERE path like '%".$cateData['prePath']."%'");
     }
     self::cacheAllCate();
-    return (new Cate())->allowFeild(true)->isUpdate(true)->save($cateData,$condition);
+    return (new Cate())->allowField(true)->isUpdate(true)->save($cateData,$condition);
   }
 
   public static function deleteCate(int $id){

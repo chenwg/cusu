@@ -8,10 +8,22 @@ final class Cate extends Entry
 {
   public function add(Request $req){
     if(!$req->isPost()){
-      return json(CateModel::getAllCate());
+      //return json(CateModel::getAllCate());
       return view('cate/index',['cateList'=>CateModel::getAllCate()]);
     }
-    return CateModel::insertCate($req->post());
+    $data = $req->post();
+    $data['level'] = 1;
+    if($data['p1'] > 0){
+      $data['pid'] = $data['p1'];
+      $data['level'] = 2;
+      $data['path'] = $data['p1'];
+    }
+    if($data['p2'] > 0){
+      $data['pid'] = $data['p2'];
+      $data['path'] = $data['p1'].','.$data['p2'];
+      $data['level'] = 3;
+    }
+    return CateModel::insertCate($data);
   }
 
   public function edit(Request $req,int $id=0){
@@ -20,4 +32,9 @@ final class Cate extends Entry
     }
     return CateModel::insertCate($req->post(),['id'=>$id]);
   }
+
+  public function get_cate(int $pid=0){
+    return _res(1,CateModel::getCate(['pid'=>$pid]));
+  }
+
 }
