@@ -11,29 +11,28 @@
 </head>
 <style>
 body{font-family: '微软雅黑';}
-.site-tips{border-left:4px solid #0170BC}
+.site-tips{border-left:4px}
 .container{padding-top:20px}
 .pcate{width:200px}
 </style>
 <body>
   <header></header>
   <section class="container">
-    <div style="display: inline-block; width: 200px; min-height: 200px; padding: 10px; border: 1px solid #ddd; overflow: auto;">
-      <ul id="cateTree"></ul>
-    </div>
     <div class="site-tips" style="display: inline-block; min-height: 200px; width: 640px; padding: 10px; margin-left: 10px; vertical-align: top;">
       <form class="layui-form">
         <div class="layui-form-item">
           <label class="layui-form-label">中文名:</label>
           <div class="layui-input-block">
-            <input type="text" name="name" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input" id="name">
+            <input type="hidden" name="prePath" value="{$cate.path}">
+            <input type="text" name="name" required  lay-verify="required" placeholder="请输入名称"
+            autocomplete="off" class="layui-input" id="name" value="{$cate.name}">
           </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">英文名:</label>
           <div class="layui-input-block">
             <input type="text" name="en" required  lay-verify="required"
-             placeholder="请输入英文名称" autocomplete="off" class="layui-input" id="enName">
+             placeholder="请输入英文名称" autocomplete="off" class="layui-input" id="enName" value="{$cate.en}">
           </div>
         </div>
         <div class="layui-form-item">
@@ -41,12 +40,28 @@ body{font-family: '微软雅黑';}
           <div class="layui-input-block">
           <div class="layui-inline">
             <select name="p1" id="p1">
+              {if condition="$cate.p1 > 0"}
+              <option value="{$cate.p1}">{$cate.p1name}</option>
+              {/if}
               <option value="0">顶级分类</option>
+              {foreach name="$cate.sname" id="sname"}
+              {if condition="$sname.id != $cate.p1"}
+              <option value="{$sname.id}">{$sname.name}</option>
+              {/if}
+              {/foreach}
             </select>
           </div>
           <div class="layui-inline">
             <select name="p2" id="p2">
+              {if condition="$cate.p2 > 0"}
+              <option value="{$cate.p2}">{$cate.p2name}</option>
+              {/if}
               <option value="0">无二级父类</option>
+              {foreach name="$cate.pname" id="pname"}
+              {if condition="$pname.id != $cate.p2"}
+              <option value="{$pname.id}">{$pname.name}</option>
+              {/if}
+              {/foreach}
             </select>
           </div>
         </div>
@@ -54,12 +69,13 @@ body{font-family: '微软雅黑';}
         <div class="layui-form-item">
           <label class="layui-form-label">排序:</label>
           <div class="layui-input-block">
-            <input type="number" name="sort" required  min="0" lay-verify="required" number value="1" autocomplete="off" class="layui-input">
+            <input type="number" name="sort" required  min="0" lay-verify="required" number value="{$cate.sort}" autocomplete="off" class="layui-input">
           </div>
         </div>
         <div class="layui-form-item">
           <div class="layui-input-block">
             <button class="layui-btn" lay-submit lay-filter="formSub">立即提交</button>
+            <button class="layui-btn layui-btn-normal" onclick="delete_cate()">删除此分类</button>
           </div>
         </div>
       </form>
@@ -72,47 +88,9 @@ body{font-family: '微软雅黑';}
 <script src="/src/layui.js"></script>
 <script src="/src/layer.js"></script>
 <script src="/src/lay/modules/form.js"></script>
-<script src="/src/lay/modules/tree.js"></script>
+<script src="/static/admin/js/common.js"></script>
 <script>
-var obj =  eval({php}print_r(json_encode($cateList)){/php});
 var form;
-layui.use(['form','tree','layer'], function(){
-  form = layui.form();
-  layui.tree({
-    elem:'#cateTree',
-    nodes:obj,
-    click:function(node){
-      layer.open({
-        type: 2,
-        area: ['700px', '530px'],
-        fixed: false, //不固定
-        maxmin: true,
-        resize:false,
-        title:'编辑/删除分类',
-        content: '/admin/cate/edit/id/'+node.id
-      });
-    }
-  });
-  form.on('select',function(data){
-    if($(data.elem).attr('id') == 'p1'){
-      $('#p2').html('<option value="0">无二级父类</option>');
-      getCate(data.value,'p2',form);
-    }
-  });
-  form.on('submit(formSub)',function(data){
-    $.post('/admin/cate/add',data.field,function(res){
-      if(res.s == 1){
-        layer.msg(res.i, {icon: 1,shade: 0.3});
-        location.reload();
-      }else{
-        layer.msg(res, {icon: 2,shade: 0.3});
-      }
-      return false;
-    })
-    return false;
-  });
-});
-
 var getCate = function(pid,idName,form){
   $.get('/admin/cate/get_cate/pid/'+pid,function(res){
     var lists = res.i;
@@ -129,7 +107,34 @@ var getCate = function(pid,idName,form){
   })
 }
 
-$(function(){
-  getCate(0,'p1',form);
-})
+var delete_cate = function(){
+  if(confirm('确定要删除吗？')){
+    $.get('/admin/cate/delete_cate/id/{$cate.id}',function(res){
+      layerCloseFrame();
+    })
+  }
+}
+
+layui.use(['form','tree','layer'], function(){
+  form = layui.form();
+  form.on('select',function(data){
+    if($(data.elem).attr('id') == 'p1'){
+      $('#p2').html('<option value="0">无二级父类</option>');
+      getCate(data.value,'p2',form);
+    }
+  });
+  form.on('submit(formSub)',function(data){
+    $.post('/admin/cate/edit/id/{$cate.id}',data.field,function(res){
+      if(res.s == 1){
+        layer.msg(res.i,{icon: 1,shade: 0.3});
+		    layerCloseFrame();
+        return false;
+      }else{
+        layer.msg(res,{icon: 2,shade: 0.3});
+      }
+      return false;
+    })
+    return false;
+  });
+});
 </script>

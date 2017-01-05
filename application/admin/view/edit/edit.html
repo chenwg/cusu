@@ -21,7 +21,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">文章标题：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="title" id="title" value="" placeholder="请输入标题">
+          <input type="text" class="form-control" name="title" id="title" value="{$article.title}" placeholder="请输入标题">
         </div>
       </div>
       <div class="form-group">
@@ -29,7 +29,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
         <div class="col-sm-10">
           <select class="form-control" id="en">
             {foreach name="cate" id="cate"}
-              <option value="{$cate.en}" >{$cate.name}</option>
+              <option value="{$cate.en}" {if condition="$article.en == $cate.en"}selected="selected"{/if}>{$cate.name}</option>
             {/foreach}
           </select>
         </div>
@@ -41,6 +41,21 @@ body{font-family: '微软雅黑';background-color: #ddd}
           <div class="file-input file-input-ajax-new">
           <div class="file-preview-thumbnails">
             <div id="imgPreview" class="file-live-thumbs">
+              {volist name='$article.img' id='img'}
+              <div class="file-preview-frame file-preview-success" data-fileindex="-1" data-template="image">
+                <div class="kv-file-content">
+                  <a href="{$img}" target="_blank"><img src="{$img}" class="imgSrc" style="width:auto;height:160px;"></a>
+                </div>
+                <div class="file-thumbnail-footer">
+                  <div class="file-thumb-progress"></div><div class="file-actions">
+                    <div class="file-footer-buttons">
+                      <button type="button" class="kv-file-remove btn btn-xs btn-default" title="删除文件" onclick="picmove(this)"><i class="glyphicon glyphicon-trash text-danger"></i></button>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+              {/volist}
             </div>
           </div>
         </div>
@@ -49,13 +64,13 @@ body{font-family: '微软雅黑';background-color: #ddd}
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">简介：</label>
         <div class="col-sm-10">
-          <textarea class="form-control" rows="3" name="profile" id="profile"></textarea>
+          <textarea class="form-control" rows="3" name="profile" id="profile">{$article.profile}</textarea>
         </div>
       </div>
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">外链地址：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="curl" id="curl" value="" placeholder="请输入以http://或https://开头的链接地址">
+          <input type="text" class="form-control" name="curl" id="curl" value="{$article.curl}" placeholder="请输入以http://或https://开头的链接地址">
           <font color="#ff0000">(如外链地址填写，内容选项无需填写，标题也可以不填写，系统会根据地址获取对应的标题，
             如无法获取则默认此链接为标题。如已填写上述标题则以填写的为主)</font>
           </div>
@@ -64,13 +79,13 @@ body{font-family: '微软雅黑';background-color: #ddd}
           <label for="" class="col-sm-2 control-label">内容：</label>
           <div class="col-sm-10">
             <textarea class="form-control" rows="15" name="info" id="info">
-
+              {$article.info}
             </textarea>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-default" id="sub" name="0">提交新增</button>
+            <button class="btn btn-default" id="sub" name="{$article.id}">提交{$article.id ? '编辑' : '新增'}</button>
           </div>
         </div>
       </div>

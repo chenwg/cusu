@@ -4,6 +4,7 @@ namespace app\admin\controller;
 use app\admin\controller\Entry;
 use think\Request;
 use app\admin\model\Article;
+use app\admin\model\Cate;
 final class Edit extends Entry
 {
   public function __construct(){
@@ -11,13 +12,14 @@ final class Edit extends Entry
   }
 
   public function index(int $id=0){
-    $article = null;
     if($id>0){
       $article = Article::joinImgInfo(['id'=>$id]);
       $article['img'] = [$article['img1'],$article['img2'],$article['img3'],$article['img4']];
       $article['img'] = array_filter($article['img']);
+      return view('edit/edit',['article'=>$article,'cate'=>Cate::getUseCate()]);
+    }else{
+      return view('',['cate'=>Cate::getUseCate()]);
     }
-    return view('',['article'=>$article]);
   }
 
   public function add(Request $req){
@@ -36,7 +38,7 @@ final class Edit extends Entry
   public function img_upload(){
     return img_upload();
   }
-  
+
   public function delete(int $id=0,string $en=null){
     return Article::deleteArticle($id,$en);
   }
