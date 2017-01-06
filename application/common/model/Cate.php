@@ -13,7 +13,8 @@ class Cate extends Model
     $query->where('is_delete',0);
   }
   public static function getAllCate(){
-    return (!empty(Cache::get('cusuCate'))) ? Cache::get('cusuCate') : self::cacheAllCate();
+    return (!empty(Cache::get('cusuCate'))) ? Cache::get('cusuCate')
+        : self::cacheAllCate();
   }
 
   public static function getOneCate(int $id):array{

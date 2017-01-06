@@ -74,7 +74,7 @@ body{font-family: '微软雅黑';}
         </div>
         <div class="layui-form-item">
           <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formSub">立即提交</button>
+            <button class="layui-btn" lay-submit lay-filter="formSub" id="formSub">立即提交</button>
             <button class="layui-btn layui-btn-normal" onclick="delete_cate()">删除此分类</button>
           </div>
         </div>
@@ -91,6 +91,7 @@ body{font-family: '微软雅黑';}
 <script src="/static/admin/js/common.js"></script>
 <script>
 var form;
+var isPush = false;
 var getCate = function(pid,idName,form){
   $.get('/admin/cate/get_cate/pid/'+pid,function(res){
     var lists = res.i;
@@ -115,6 +116,12 @@ var delete_cate = function(){
   }
 }
 
+$(function(){
+  $('#formSub').click(function(){
+    isPush = true;
+  })
+})
+
 layui.use(['form','tree','layer'], function(){
   form = layui.form();
   form.on('select',function(data){
@@ -124,16 +131,19 @@ layui.use(['form','tree','layer'], function(){
     }
   });
   form.on('submit(formSub)',function(data){
-    $.post('/admin/cate/edit/id/{$cate.id}',data.field,function(res){
-      if(res.s == 1){
-        layer.msg(res.i,{icon: 1,shade: 0.3});
-		    layerCloseFrame();
-        return false;
-      }else{
-        layer.msg(res,{icon: 2,shade: 0.3});
-      }
+    if(isPush){
+      $.post('/admin/cate/edit/id/{$cate.id}',data.field,function(res){
+        if(res.s == 1){
+          layer.msg(res.i,{icon: 1,shade: 0.3});
+  		    layerCloseFrame();
+          return false;
+        }else{
+          layer.msg(res,{icon: 2,shade: 0.3});
+        }
+      })
+      isPush = false;
       return false;
-    })
+    }
     return false;
   });
 });

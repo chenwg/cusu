@@ -59,7 +59,7 @@ body{font-family: '微软雅黑';}
         </div>
         <div class="layui-form-item">
           <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formSub">立即提交</button>
+            <button class="layui-btn" lay-submit="" lay-filter="formSub" id="formSub">立即提交</button>
           </div>
         </div>
       </form>
@@ -76,6 +76,7 @@ body{font-family: '微软雅黑';}
 <script>
 var obj =  eval({php}print_r(json_encode($cateList)){/php});
 var form;
+var isPush = false;
 layui.use(['form','tree','layer'], function(){
   form = layui.form();
   layui.tree({
@@ -100,15 +101,18 @@ layui.use(['form','tree','layer'], function(){
     }
   });
   form.on('submit(formSub)',function(data){
-    $.post('/admin/cate/add',data.field,function(res){
-      if(res.s == 1){
-        layer.msg(res.i, {icon: 1,shade: 0.3});
-        location.reload();
-      }else{
-        layer.msg(res, {icon: 2,shade: 0.3});
-      }
+    if(isPush){
+      $.post('/admin/cate/add',data.field,function(res){
+        if(res.s == 1){
+          layer.msg(res.i, {icon: 1,shade: 0.3});
+          location.reload();
+        }else{
+          layer.msg(res, {icon: 2,shade: 0.3});
+        }
+      })
+      isPush = false;
       return false;
-    })
+    }
     return false;
   });
 });
@@ -131,5 +135,8 @@ var getCate = function(pid,idName,form){
 
 $(function(){
   getCate(0,'p1',form);
+  $('#formSub').click(function(){
+    isPush = true;
+  })
 })
 </script>
