@@ -7,7 +7,7 @@ use app\admin\model\Cate as CateModel;
 final class Cate extends Entry
 {
   public function index(){
-    return view('cate/index',['cateList'=>CateModel::getAllCate()]);
+    return view('cate/index',['cateList'=>CateModel::getAllCate(),'pcate'=>CateModel::getCate(['pid'=>0,'is_delete'=>0])]);
   }
   public function add(Request $req){
     return (new CateModel())->validName($this->get_data($req->post()))

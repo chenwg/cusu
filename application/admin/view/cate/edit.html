@@ -113,7 +113,9 @@ var delete_cate = function(){
     $.get('/admin/cate/delete_cate/id/{$cate.id}',function(res){
       layerCloseFrame();
     })
+    return false;
   }
+  return false;
 }
 
 $(function(){

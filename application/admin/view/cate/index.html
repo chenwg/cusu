@@ -42,6 +42,9 @@ body{font-family: '微软雅黑';}
           <div class="layui-inline">
             <select name="p1" id="p1">
               <option value="0">顶级分类</option>
+              {foreach name="$pcate" id="cateOne"}
+                <option value="{$cateOne.id}">{$cateOne.name}</option>
+              {/foreach}
             </select>
           </div>
           <div class="layui-inline">
@@ -134,7 +137,7 @@ var getCate = function(pid,idName,form){
 }
 
 $(function(){
-  getCate(0,'p1',form);
+  //getCate(0,'p1',form);
   $('#formSub').click(function(){
     isPush = true;
   })
