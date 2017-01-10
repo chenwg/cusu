@@ -17,12 +17,15 @@ class Reptile extends Controller
   private function post_html(string $curl,array $param = []){
     $ch = curl_init();
     curl_setopt($ch,CURLOPT_URL,$curl);
-    curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
     curl_setopt($ch,CURLOPT_POST,count($param));
     curl_setopt($ch,CURLOPT_HEADER,0);
     curl_setopt($ch,CURLOPT_ENCODING,'gzip');
     curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);//抓取302跳转后的页面
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+    if(1 == strpos('c'.$curl,'https://')){
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    }
     curl_setopt($ch,CURLOPT_POSTFIELDS,$param);
     $res = curl_exec($ch);
     curl_close($ch);
@@ -30,11 +33,14 @@ class Reptile extends Controller
   }
   public function get_html($curl){
     $ch = curl_init($curl);
-    curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);//跳过https验证
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     curl_setopt($ch,CURLOPT_ENCODING,'gzip');
     curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);//抓取302跳转后的页面
     curl_setopt($ch,CURLOPT_BINARYTRANSFER,true);
+    if(1 == strpos('c'.$curl,'https://')){
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    }
     $res = curl_exec($ch);
     curl_close($ch);
     if(!$res)return '';

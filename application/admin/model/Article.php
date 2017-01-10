@@ -11,13 +11,13 @@ class Article extends Particle
 
   public static function inArticle(int $id=0,array $articleData,string $articleInfo=null){
     $htmlInfo = $articleInfo;
-    if($id == 0 && !empty($articleData['curl'])){
+    if(0 == $id && !empty($articleData['curl'])){
       $htmlInfo = (new \app\common\controller\Reptile())->get_html($articleData['curl']);
       if(empty($articleData['title'])){
         $articleData['title'] = (new \app\common\controller\Reptile())->get_title($articleData['curl'],$htmlInfo);
       }
     }
-    if($id == 0 && empty($articleData['img1']) && !empty($htmlInfo)){
+    if(0 == $id && empty($articleData['img1']) && !empty($htmlInfo)){
       $articleData = get_img($htmlInfo,$articleData);
     }
     $articleModel = new Article;
