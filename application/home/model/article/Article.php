@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
-namespace app\home\model;
-use app\common\model\Article as Particle;
+namespace app\home\model\article;
+use app\common\model\article\Article as Particle;
 class Article extends Particle
 {
   public static function s(string $kw,int $page=0):array{

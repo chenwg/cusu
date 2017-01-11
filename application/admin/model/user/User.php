@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace app\admin\model;
+namespace app\admin\model\user;
 use think\Model;
 class User extends Model
 {

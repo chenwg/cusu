@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
-namespace app\admin\model;
-use app\common\model\Article as Particle;
+namespace app\admin\model\article;
+use app\common\model\article\Article as Particle;
 use think\Cache;
 class Article extends Particle
 {

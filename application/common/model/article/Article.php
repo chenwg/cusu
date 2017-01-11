@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-namespace app\common\model;
+namespace app\common\model\article;
 use think\Model;
-use app\common\model\ArticleInfo;
-use app\common\model\ArticleImg;
+use app\common\model\article\ArticleInfo;
+use app\common\model\article\ArticleImg;
 use think\Cache;
 class Article extends Model
 {

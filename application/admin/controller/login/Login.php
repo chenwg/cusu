@@ -1,8 +1,8 @@
 <?php
-namespace app\admin\controller;
-use app\admin\controller\Entry;
+namespace app\admin\controller\login;
+use app\admin\controller\init\Entry;
 use think\Request;
-use app\admin\model\User;
+use app\admin\model\user\User;
 final class Login extends Entry
 {
   public function index(){

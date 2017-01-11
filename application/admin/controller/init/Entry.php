@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace app\admin\controller;
+namespace app\admin\controller\init;
 use think\Controller;
 class Entry extends Controller
 {

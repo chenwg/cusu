@@ -1,16 +1,13 @@
 <?php
 declare(strict_types=1);
-namespace app\home\controller;
+namespace app\home\controller\article;
+use app\home\controller\init\Entry;
 use think\Request;
 use app\home\logic\ArticleLogic;
-use app\home\model\Article as ArticleM;
+use app\home\model\article\Article as ArticleM;
 use think\Cache;
 final class Article extends Entry
 {
-  public function __construct(){
-    parent::__construct();
-  }
-
   public function res(string $en='suibi',int $id=0){
     if($id>0){
       $data = self::getInfoById($id);
@@ -22,7 +19,7 @@ final class Article extends Entry
         Cache::set($en.request()->get('page'),$data);
       }
     }
-    return view('article/article'.$this->tpl,$data);
+    return $this->view('article/article',$data);
   }
 
   //$id=0
@@ -44,7 +41,7 @@ final class Article extends Entry
   }
 
   public function s(Request $req){
-    return view('article/article'.$this->tpl,
+    return $this->view('article/article',
     empty($req->get('kw')) ? ['data'=>null,'title'=>config('s')] : ArticleM::s($req->get('kw')));
   }
 

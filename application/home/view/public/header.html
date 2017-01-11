@@ -19,26 +19,23 @@
         <div class="container-fluid">
         <div>
             <ul class="nav navbar-nav pjax-a">
-                <li><a href="/article/en/suibi">随笔</a></li>
-                <li><a href="/article/en/jilu">记录</a></li>
+              {foreach name="cate" id="cate1"}
+                {if condition="isset($cate1.children) && !empty($cate1.children)"}
                 <li class="dropdown">
                     <a href="jacascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                        学习<b class="caret"></b>
+                        {$cate1.name}<b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/article/en/php">PHP</a></li>
+                      {foreach name="cate1.children" id="cate2"}
+                        <li><a href="/article/en/{$cate2.en}">{$cate2.name}</a></li>
                         <li class="divider"></li>
-                        <li><a href="/article/en/js">javascript</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/article/en/mysql">mysql</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/article/en/redis">redis</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/article/en/nodejs">nodejs</a></li>
-                        <li class="divider"></li>
-                        <li><a href="/article/en/http">http</a></li>
+                        {/foreach}
                     </ul>
                 </li>
+                {else/}
+                  <li><a href="/article/en/{$cate1.en}">{$cate1.name}</a></li>
+                {/if}
+              {/foreach}
                 <li>&nbsp;&nbsp;&nbsp;</li>
                 <li><input type="text" class="form-control" name="kw" placeholder="输入后按enter键" id="s"></li>
             </ul>

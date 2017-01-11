@@ -1,6 +1,5 @@
 <?php
-declare(strict_types=1);
-namespace app\admin\model;
+namespace app\home\model\article;
 use think\Model;
 class ArticleInfo extends Model
 {

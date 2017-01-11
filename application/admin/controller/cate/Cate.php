@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-namespace app\admin\controller;
-use app\admin\controller\Entry;
+namespace app\admin\controller\cate;
+use app\admin\controller\init\Entry;
 use think\Request;
-use app\admin\model\Cate as CateModel;
+use app\admin\model\cate\Cate as CateModel;
 final class Cate extends Entry
 {
   public function index(){

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
-namespace app\admin\controller;
-use app\admin\controller\Entry;
+namespace app\admin\controller\article;
+use app\admin\controller\init\Entry;
 use think\Request;
-use app\admin\model\Article;
-use app\admin\model\Cate;
+use app\admin\model\article\Article;
+use app\admin\model\cate\Cate;
 final class Edit extends Entry
 {
   public function __construct(){
@@ -18,7 +18,7 @@ final class Edit extends Entry
       $article['img'] = array_filter($article['img']);
       return view('edit/edit',['article'=>$article,'cate'=>Cate::getUseCate()]);
     }else{
-      return view('',['cate'=>Cate::getUseCate()]);
+      return view('edit/index',['cate'=>Cate::getUseCate()]);
     }
   }
 
