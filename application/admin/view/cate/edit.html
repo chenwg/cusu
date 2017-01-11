@@ -110,7 +110,7 @@ var getCate = function(pid,idName,form){
 
 var delete_cate = function(){
   if(confirm('确定要删除吗？')){
-    $.get('/admin/cate/delete_cate/id/{$cate.id}',function(res){
+    $.get('/admin/cate.cate/delete_cate/id/{$cate.id}',function(res){
       layerCloseFrame();
     })
     return false;
@@ -134,7 +134,7 @@ layui.use(['form','tree','layer'], function(){
   });
   form.on('submit(formSub)',function(data){
     if(isPush){
-      $.post('/admin/cate/edit/id/{$cate.id}',data.field,function(res){
+      $.post('/admin/cate.cate/edit/id/{$cate.id}',data.field,function(res){
         if(res.s == 1){
           layer.msg(res.i,{icon: 1,shade: 0.3});
   		    layerCloseFrame();

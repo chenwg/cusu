@@ -93,7 +93,7 @@ layui.use(['form','tree','layer'], function(){
         maxmin: true,
         resize:false,
         title:'编辑/删除分类',
-        content: '/admin/cate/edit/id/'+node.id
+        content: '/admin/cate.cate/edit/id/'+node.id
       });
     }
   });
@@ -105,7 +105,7 @@ layui.use(['form','tree','layer'], function(){
   });
   form.on('submit(formSub)',function(data){
     if(isPush){
-      $.post('/admin/cate/add',data.field,function(res){
+      $.post('/admin/cate.cate/add',data.field,function(res){
         if(res.s == 1){
           layer.msg(res.i, {icon: 1,shade: 0.3});
           location.reload();
@@ -121,7 +121,7 @@ layui.use(['form','tree','layer'], function(){
 });
 
 var getCate = function(pid,idName,form){
-  $.get('/admin/cate/get_cate/pid/'+pid,function(res){
+  $.get('/admin/cate.cate/get_cate/pid/'+pid,function(res){
     var lists = res.i;
     var str = '';
     for(var i in lists){
