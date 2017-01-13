@@ -8,7 +8,7 @@ return [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
-    'article/s'=>['home/article.article/s',['method'=>'get']],
+    '/s'=>['home/article.article/s',['method'=>'get']],
     //'article'=>['home/article/res',['method'=>'get','cache'=>3600]],
     'article/'=>['home/article.article/res',['method'=>'get']],
     'img'=>['api/img/res',['method'=>'get']],
