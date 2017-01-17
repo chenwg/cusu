@@ -3,6 +3,9 @@ declare(strict_types=1);
 namespace app\api\controller;
 use think\Request;
 class Img{
+  public function __destruct(){
+    ob_end_clean();
+  }
   public function res(Request $req){
     $filename = $req->get('fp');
     ob_end_clean();
@@ -21,6 +24,5 @@ class Img{
         readfile('files'.'/'.$filename);
       }
     }
-    ob_end_clean();
   }
 }
