@@ -66,10 +66,10 @@ function get_img($htmlInfo,$articleData){
       }
     }
   }
-  isset($imgArray[0]) && (!empty($imgArray[0])) && $articleData['img1'] = $imgArray[0];
-  isset($imgArray[1]) && (!empty($imgArray[1])) && $articleData['img2'] = $imgArray[1];
-  isset($imgArray[2]) && (!empty($imgArray[2])) && $articleData['img3'] = $imgArray[2];
-  isset($imgArray[3]) && (!empty($imgArray[3])) && $articleData['img4'] = $imgArray[3];
+  isset($imgArray[0]) && (!empty($imgArray[0])) && $articleData['img1'] = '/img?fp='.$imgArray[0];
+  isset($imgArray[1]) && (!empty($imgArray[1])) && $articleData['img2'] = '/img?fp='.$imgArray[1];
+  isset($imgArray[2]) && (!empty($imgArray[2])) && $articleData['img3'] = '/img?fp='.$imgArray[2];
+  isset($imgArray[3]) && (!empty($imgArray[3])) && $articleData['img4'] = '/img?fp='.$imgArray[3];
   return $articleData;
 }
 

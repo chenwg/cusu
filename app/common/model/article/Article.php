@@ -9,6 +9,7 @@ class Article extends Model
 {
   protected $autoWriteTimestamp = true;
   protected $updateTime = false;
+  protected $auto=[];
   protected static function init(){
     //no no no no bush
   }
