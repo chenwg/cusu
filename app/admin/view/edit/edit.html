@@ -10,6 +10,7 @@
   <link href="/src/css/layui.css" rel="stylesheet">
   <link href="/fileinput/css/fileinput.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/edit/css/wangEditor.css">
+  <link rel="stylesheet" type="text/css" href="/markedit/markmd.css">
 </head>
 <style>
 body{font-family: '微软雅黑';background-color: #ddd}
@@ -75,12 +76,23 @@ body{font-family: '微软雅黑';background-color: #ddd}
             如无法获取则默认此链接为标题。如已填写上述标题则以填写的为主)</font>
           </div>
         </div>
-        <div class="form-group" id="addCurl">
+        <div class="form-group infop">
           <label for="" class="col-sm-2 control-label">内容：</label>
           <div class="col-sm-10">
-            <textarea class="form-control" rows="15" name="info" id="info">
+            <textarea class="form-control" rows="15" name="info" id="infop">
               {$article.info}
             </textarea>
+            <!--a href="javascript:;" onclick="changeEdit(1)">使用markdown编辑器</a-->
+          </div>
+
+        </div>
+        <div class="form-group infom">
+          <label for="" class="col-sm-2 control-label">内容：</label>
+          <div class="col-sm-10">
+          <div id="editormd">
+                <textarea id="infom">{$article.info}</textarea>
+            </div>
+            <a href="javascript:;" onclick="changeEdit(2)">使用普通编辑器</a>
           </div>
         </div>
         <div class="form-group">
@@ -107,8 +119,32 @@ body{font-family: '微软雅黑';background-color: #ddd}
     <script src="/src/layer.js"></script>
     <script src="/fileinput/js/fileinput.min.js"></script>
     <script src="/fileinput/js/zh.js"></script>
+    <script src="/markedit/markmd.js"></script>
+    <script>
+    /*
+    var infoid = 'infop';
+    function changeEdit(t){
+      if(t==1){
+        infoid = 'infom';
+        $('.infom').show();
+        $('.infop').hide()
+      }else{
+        infoid = 'infop';
+        $('.infom').hide();
+        $('.infop').show()
+      }
+    }
+    $(function() {
+      var testEditor = editormd("editormd", {
+        width : '100%',
+        height : 400,
+        path : '/markedit/lib/'
+      });
+    })
+    */
+    </script>
     <script type="text/javascript">
-    var editor = new wangEditor('info');
+    var editor = new wangEditor('infop');
     editor.create();
     </script>
     <script>
@@ -161,7 +197,7 @@ body{font-family: '微软雅黑';background-color: #ddd}
             type:'post',
             data:{
               title:$('#title').val(),
-              info:$('#info').val(),
+              info:$('#'+infoid).val(),
               profile:$('#profile').val(),
               en:$('#en').val(),
               curl:$('#curl').val(),
@@ -197,7 +233,8 @@ body{font-family: '微软雅黑';background-color: #ddd}
             }
           })
       })
-    })
+    });
+    setTimeout("$('.infom').hide()",1000)
     </script>
   </body>
   </html>

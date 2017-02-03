@@ -48,6 +48,18 @@
 20.金额存储最好用int型以分为单位存储，数据库只是存数据的地方，能少点数据库操作就少点，操作数据库是比较耗时的
 能用到缓存就尽量用缓存，文件缓存 redis memcached等缓存方式合理使用,nosql也可以用
 
+21.escapeshellarg()
+
+22. php闭包 fun(function()use($param){echo $param});
+
+23.压力测试工具 免费的JMeter，http_load，webbench 和收费的loadrunner，
+也可以使用腾讯的质量开放平台 wetest.qq.com
+
+24.网站应用性能是个系统工程，是涉及到网站架构各个层面，从前端渲染速度，到页面大小，
+session存储效率，ajax性能，缓存命中率，数据库设计及访问速度
+
+
+
 
 
 
