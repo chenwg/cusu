@@ -10,6 +10,7 @@ return [
     ],
     '/s'=>['home/article.article/s',['method'=>'get']],
     //'article'=>['home/article/res',['method'=>'get','cache'=>3600]],
+    'article/g'=>['home/article.article/g',['method'=>'get']],
     'article/'=>['home/article.article/res',['method'=>'get']],
     'img'=>['api/img/res',['method'=>'get']],
     'cate'=>['admin/cate.cate/index',['method'=>'get']],
