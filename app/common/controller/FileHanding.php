@@ -17,6 +17,7 @@ class FileHanding extends Controller
   }
 
   public function img_upload(){
+    //chenwei
     $file = $_FILES['suFiles'];
     if($file['size'][0] > 501*1024)return json(['susname'=>'','err'=>$file['name'][0].'图片大小不能大于500k']);
     if(!in_array($file['type'][0],['image/jpeg','image/jpg','image/png','image/gif']))return json(['susname'=>'','err'=>$file['name'][0].'图片格式不正确']);
