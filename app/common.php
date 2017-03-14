@@ -9,7 +9,7 @@ function _res($s=0,$i=null){
 }
 
 function _end($i=''){
-  exit($i);
+  die($i);
 }
 function _utf8($res){
   return mb_convert_encoding($res,'utf-8','GBK,UTF-8,ASCII,gb18030,UTF-16LE');
